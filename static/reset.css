@@ -130,3 +130,6 @@ html {
   color: #666;
   -webkit-text-size-adjust: 100%!important;
 }
+.sl{
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}

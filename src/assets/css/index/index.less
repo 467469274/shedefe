@@ -3,12 +3,15 @@
   .top {
     width: 100%;
     &.clickAdd{
-      position:fixed;
       height: auto;
       width: 100%;
       z-index:3;
       .labalWarp{
         height: auto!important;
+        position: fixed;
+        left: 0;
+        top:0;
+        z-index: 99;
         .spanWarp{
           height: auto!important;
         }
@@ -29,6 +32,7 @@
       overflow: hidden;
       border-bottom: .19rem solid #f2f2f2;
       background: #ffffff;
+      height:.88rem;
       .scroll-content {
         position: relative;
         transition: top 0.5s;
@@ -37,6 +41,7 @@
           text-align: center;
           display: flex;
           font-size: 14px;
+          white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
           .icons-laba {
             background-image: url("/static/images/laba.png");
             background-repeat: no-repeat;
@@ -138,15 +143,12 @@
     }
   }
   .indexMain {
-    height: 6.3rem;
-    overflow: hidden;
-    &.isPaddingTop{
+/*    &.isPaddingTop{
       margin-top:6.26rem;
-    }
+    }*/
     .commList {
       border-top: 1px solid #e6e6e6;
-      overflow-y: scroll;
-      height: 6.3rem;
+      padding-bottom:.5rem;
       .item {
         padding: .25rem .08rem .25rem .08rem;
         box-sizing: border-box;
@@ -155,6 +157,7 @@
         img {
           flex: 0 0 2.5rem;
           height: 2.5rem;
+          width: 2.5rem;
         }
         .itemMain {
           flex: 1;

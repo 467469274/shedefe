@@ -3,14 +3,14 @@
     <div class="top" ref="top" :class="{'clickAdd':isAdd}">
       <mt-swipe :auto="4000" class="siwper">
         <mt-swipe-item :key="index" v-for="(item,index) in bannerList">
-          <img :src="'http://shede.sinmore.vip/storage/banner/fo0TMY4gJmK7ts3FtGyEos0uvyHTvWSybhkCT1wn.jpeg'" alt="">
+          <img :src="'http://shede.sinmore.vip/storage/banner/'+item.pic_url" alt="">
         </mt-swipe-item>
       </mt-swipe>
       <div class="scroll-wrap">
         <ul class="scroll-content" :style="{ top }">
-          <li v-for="item in prizeList">
+          <li :key="index" v-for="(item,index) in prizeList">
             <i class="icons-laba"></i>
-            <p>d121231231231d121231231231d121231231231d121231231231d121231231231d121231231231</p>
+            <p>{{item.title}}</p>
             <a href="">戳此查看>></a>
           </li>
         </ul>
@@ -43,8 +43,8 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10">
-        <li :key="index" v-for="(item,index) in commList" class="item">
-          <img src="/static/images/首页-06-29-紫_03.jpg">
+        <li :key="index" v-for="(item,index) in commList" class="item" @click="godetail(item.id)">
+          <img :src="item.cover">
           <div class="itemMain">
             <p class="title">{{item.name}}</p>
             <div class="labalList">
@@ -90,7 +90,7 @@
         } else {
           this.activeIndex = 0;
         }
-      }, 1000);
+      }, 5000);
     },
     methods: {
       all() {
@@ -108,10 +108,9 @@
         }
       },
       getGoods(obj, bol) {
-        console.log(obj);
         let _this = this;
         this.ajget('/api/getGoods', obj, function (data) {
-          console.log(data);
+          console.log(data)
           let arss = [];
           for (let i = 0; i < data.length; i++) {
             let obj = data[i];
@@ -132,7 +131,13 @@
           }
         }, function (err) {
           console.log(err)
-        })
+        });
+        this.ajget('/api/getContentByPostion', obj, function (data) {
+          _this.prizeList = data;
+        }, function (err) {
+          console.log(err)
+        });
+
       },
       sure() {
         this.p = 1;
@@ -215,16 +220,20 @@
       },
       clickAdd() {
         this.isAdd = !this.isAdd;
+      },
+      godetail(n){
+        this.$router.push({path: '/commdetail/'+n});
       }
     },
     created() {
       let _this = this;
       this.ajget('/api/getBanners', {}, function (data) {
+        console.log(data)
         _this.bannerList = data;
       }, function (err) {
         console.log(err)
       });
-      this.ajget('/api/getLabels', {num: 4}, function (data) {
+      this.ajget('/api/getLabels', {}, function (data) {
         let ars = [];
         for (let i = 0; i < data.length; i++) {
           let obj = data[i];
@@ -242,7 +251,7 @@
     },
     computed: {
       top() {
-        return -this.activeIndex * 4.4 + 'rem';
+        return -this.activeIndex * .88 + 'rem';
       }
     }
   }
