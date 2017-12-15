@@ -1,11 +1,37 @@
 <template>
   <div class="commdetailWarp">
-    <mt-swipe :auto="4000" class="siwper">
-      <mt-swipe-item v-for="(item,index) in comm.pic"
-                     :key="index">
-        <img :src="item">
-      </mt-swipe-item>
-    </mt-swipe>
+    <div class="swiperWarp">
+      <mt-swipe :auto="4000" class="siwper">
+        <mt-swipe-item v-for="(item,index) in comm.pic"
+                       :key="index">
+          <img :src="item">
+        </mt-swipe-item>
+      </mt-swipe>
+      <div class="kuaisu" @click="isShowFun" :class="{'isShowClass':isShow}">
+       <div class="btnList">
+         <span class="leftIcon"></span>
+         <span class="iconTxt"  v-if="!isShow">快速导航</span>
+         <div class="items" v-if="isShow">
+           <div class="item" @click.stop="gos(1)">
+             <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
+             <p class="itemTxt">租相机</p>
+           </div>
+           <div class="item" @click.stop="gos(2)">
+             <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
+             <p class="itemTxt">形形色色</p>
+           </div>
+           <div class="item" @click.stop="gos(3)">
+             <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
+             <p class="itemTxt">购物车</p>
+           </div>
+           <div class="item" @click.stop="gos(4)">
+             <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
+             <p class="itemTxt">查订单</p>
+           </div>
+         </div>
+       </div>
+      </div>
+    </div>
     <div class="commInfo">
       <p class="title sl">
         {{comm.name}}
@@ -14,26 +40,12 @@
         {{comm.sale_num}}人用过
       </p>
       <div class="labalList">
-        <span>拍星星</span>
-        <span>配件专区</span>
-        <span>背景虚化</span>
-        <span>全画幅</span>
-        <span>风景</span>
-        <span>拍星星</span>
-        <span>配件专区</span>
-        <span>背景虚化</span>
-        <span>全画幅</span>
-        <span>风景</span>
-        <span>拍星星</span>
-        <span>配件专区</span>
-        <span>背景虚化</span>
-        <span>全画幅</span>
-        <span>风景</span>
+        <span v-for="(item,index) in comm.lname">{{item}}</span>
       </div>
     </div>
     <div class="numInfo">
       <div class="numItem">
-        <p class="title">¥{{comm.start_price}}/5天</p>
+        <p class="title">¥{{comm.start_price}}/{{comm.start_days}}天</p>
         <p class="other">
           起租价
         </p>
@@ -54,10 +66,10 @@
     <div class="strategy">
       <img src="/static/images/shoubashou_03.png" alt="">
     </div>
-    <div class="cardItem">
+    <div class="cardItem" @click="gocomment">
       <div class="inner borderbo">
         综合评价
-        
+
       </div>
     </div>
     <div class="cardItem bor2">
@@ -87,10 +99,12 @@
     data(){
       return {
         picList: [],
-        comm: {}
+        comm: {},
+        isShow:false
       }
     },
     created(){
+      document.documentElement.scrollTop = 0;
       this.getData()
     },
     methods: {
@@ -98,9 +112,22 @@
         let _this = this;
         this.ajget('/api/goodsDetail', {goods_id: _this.$route.params.id}, function (data) {
           console.log(data);
+          data.lname = data.lname.split(",")
           _this.comm = data;
 
         })
+      },
+      isShowFun(){
+        this.isShow = !this.isShow
+      },
+      gos(n){
+        if(n == 1){
+          this.$router.push({path: '/index'});
+        }
+        console.log()
+      },
+      gocomment(){
+        this.$router.push({path: '/comment/'+this.$route.params.id});
       }
     }
   }

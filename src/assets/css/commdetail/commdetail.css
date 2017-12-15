@@ -2,12 +2,66 @@
   width: 100%;
   font-size: 0;
 }
-.commdetailWarp .siwper {
+.commdetailWarp .swiperWarp {
+  position: relative;
+}
+.commdetailWarp .swiperWarp .siwper {
   height: 7.5rem;
 }
-.commdetailWarp .siwper img {
+.commdetailWarp .swiperWarp .siwper img {
   height: 7.5rem;
   width: 100%;
+}
+.commdetailWarp .swiperWarp .kuaisu {
+  width: 1.5rem;
+  height: .96rem;
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 1rem 0 0 1rem;
+  color: #ffffff;
+  font-size: 13px;
+}
+.commdetailWarp .swiperWarp .kuaisu .btnList {
+  display: flex;
+}
+.commdetailWarp .swiperWarp .kuaisu.isShowClass {
+  width: 6rem;
+}
+.commdetailWarp .swiperWarp .kuaisu .leftIcon {
+  background: url("/static/images/left.png") no-repeat;
+  height: .96rem;
+  flex: 0 0 .3rem;
+  display: inline-block;
+  background-size: .5rem 31px;
+  background-position: left center;
+}
+.commdetailWarp .swiperWarp .kuaisu .iconTxt {
+  flex: 0 0 27px;
+  display: inline-block;
+  padding-top: .18rem;
+  margin-left: 20px;
+}
+.commdetailWarp .swiperWarp .kuaisu .items {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+}
+.commdetailWarp .swiperWarp .kuaisu .items .item {
+  flex: 1;
+  line-height: .4rem;
+}
+.commdetailWarp .swiperWarp .kuaisu .items .item .itemIcon {
+  padding-top: .09rem;
+  text-align: center;
+}
+.commdetailWarp .swiperWarp .kuaisu .items .item .itemIcon img {
+  width: 21%;
+}
+.commdetailWarp .swiperWarp .kuaisu .items .item .itemTxt {
+  font-size: 12px;
+  text-align: center;
 }
 .commdetailWarp .commInfo {
   padding: 0 .24rem;

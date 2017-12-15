@@ -1,11 +1,65 @@
 .commdetailWarp{
   width: 100%;
   font-size: 0;
-  .siwper{
-    height: 7.5rem;
-    img{
+  .swiperWarp{
+    position: relative;
+    .siwper{
       height: 7.5rem;
-      width: 100%;
+      img{
+        height: 7.5rem;
+        width: 100%;
+      }
+    }
+    .kuaisu{
+      width: 1.5rem;
+      height: .96rem;
+      position:absolute;
+      right: 0;
+      bottom: 1rem;
+      background:rgba(0,0,0,0.8);
+      border-radius: 1rem 0 0 1rem;
+      color: #ffffff;
+      font-size: 13px;
+      .btnList{
+        display: flex;
+      }
+      &.isShowClass{
+        width: 6rem;
+      }
+      .leftIcon{
+        background: url("/static/images/left.png") no-repeat;
+        height: .96rem;
+        flex:0 0 .3rem;
+        display: inline-block;
+        background-size: .5rem 31px;
+        background-position: left center;
+      }
+      .iconTxt{
+        flex:0 0 27px;;
+        display:inline-block;
+        padding-top: .18rem;
+        margin-left: 20px;
+      }
+      .items{
+        flex: 1;
+        margin-left: 20px;
+        display: flex;
+        .item{
+          flex: 1;
+          line-height: .4rem;
+          .itemIcon{
+            padding-top: .09rem;
+            text-align: center;
+            img{
+              width: 21%;
+            }
+          }
+          .itemTxt{
+            font-size: 12px;
+            text-align: center;
+          }
+        }
+      }
     }
   }
   .commInfo{

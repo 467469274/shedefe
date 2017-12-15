@@ -6,6 +6,8 @@ import gift from '@/components/gift/gift';
 import cart from '@/components/cart/cart';
 import order from '@/components/order/order';
 import commdetail from '@/components/commdetail/commdetail';
+import comment from '@/components/comment/comment';
+import commentDetail from '@/components/comment/commentDetail';
 import Mint from 'mint-ui';
 
 Vue.use(Router);
@@ -45,6 +47,20 @@ export default new Router({
       path: '/commdetail/:id',
       name: 'commdetail',
       component: commdetail
+    },
+    {
+      path: '/comment/:id',
+      name: 'comment',
+      component: comment
+    },
+    {
+      path: '/commentDetail/:id',
+      name: 'commentDetail',
+      component: commentDetail
+    },
+    {
+      path: '*',
+      component:index
     }
   ]
 })

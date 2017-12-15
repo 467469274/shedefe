@@ -1,0 +1,60 @@
+.commentWarp .commentLength {
+  line-height: .88rem;
+  font-size: 15px;
+  padding-left: .24rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+.commentWarp .commentList {
+  padding: 0 .24rem;
+}
+.commentWarp .commentList .commentItem {
+  padding: .17rem 0 .23rem 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+.commentWarp .commentList .commentItem .itemTitle {
+  line-height: .47rem;
+  overflow: hidden;
+}
+.commentWarp .commentList .commentItem .itemTitle .userName {
+  float: left;
+  font-size: 13px;
+  color: #333333;
+}
+.commentWarp .commentList .commentItem .itemTitle .time {
+  float: right;
+  font-size: 11px;
+  color: #999999;
+}
+.commentWarp .commentList .commentItem .content {
+  line-height: .44rem;
+  font-size: 14px;
+  color: #333333;
+}
+.commentWarp .commentList .commentItem .imgList {
+  overflow: hidden;
+}
+.commentWarp .commentList .commentItem .imgList .imgItem {
+  width: 24%;
+  float: left;
+  margin-right: 1%;
+  margin-bottom: .1rem;
+  height: 1.7rem;
+}
+.commentWarp .commentList .commentItem .imgList .imgItem:nth-child(4) {
+  margin-right: 0;
+}
+.commentWarp .commentList .commDetail .imgList {
+  margin-top: .3rem;
+}
+.commentWarp .commentList .commDetail .imgList img {
+  width: 100%!important;
+  height: auto!important;
+  margin-bottom: .22rem!important;
+  margin-right: 0!important;
+}
+.empty {
+  line-height: 80px;
+  text-align: center;
+  font-size: 15px;
+  border-bottom: 1px solid #e6e6e6;
+}
