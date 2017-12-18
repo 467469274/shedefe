@@ -1,0 +1,49 @@
+.detail {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #ffffff;
+  left: 0;
+  top: 0;
+}
+.detail .detailTop {
+  padding: .24rem;
+  font-size: 13px;
+  color: #333333;
+  line-height: .35rem;
+  vertical-align: top;
+  display: flex;
+  border-bottom: solid #f2f2f2  .2rem;
+}
+.detail .detailTop img {
+  flex: 0 0 1.2rem;
+  height: 1.2rem;
+  margin-right: .3rem;
+}
+.detail .tabs {
+  height: .91rem;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+}
+.detail .tabs .tab {
+  flex: 1;
+}
+.detail .tabs .tab.active span {
+  color: #c942b3;
+  border-color: #c942b3;
+}
+.detail .tabs .tab span {
+  text-align: center;
+  font-size: 15px;
+  color: #333333;
+  width: 1.28rem;
+  display: block;
+  margin: 0 auto;
+  line-height: .84rem;
+  border-bottom: .04rem solid  #ffffff;
+}
+.detail .detailWarp {
+  width: 100%;
+  font-size: 15px;
+  padding: .2rem;
+}

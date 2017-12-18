@@ -1,0 +1,33 @@
+.orderStatus{
+  background: #ffffff;
+  display: flex;
+  padding:.4rem 0 .3rem 0;
+  border-bottom: .2rem solid #f2f2f2;
+  .statusItem{
+    flex: 1;
+    text-align: center;
+    &.active{
+      .icon{
+        background-image: url("/static/images/in.png");
+        background-size:.72rem .81rem;
+      }
+      .title{
+        color: #c942b3;
+      }
+    }
+    .icon{
+      width: .72rem;
+      height: .81rem;
+      display: block;
+      margin: 0 auto;
+      background-image: url("/static/images/no.png");
+      background-size:.72rem .72rem;
+      background-repeat: no-repeat;
+    }
+    .title{
+      line-height: .49rem;
+      font-size: 14px;
+      color: #b7b3bc;
+    }
+  }
+}

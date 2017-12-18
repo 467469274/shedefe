@@ -1,0 +1,241 @@
+.cartEndWarp .mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+.cartEndWarp .borderN {
+  border: none!important;
+}
+.cartEndWarp .iconRight {
+  position: absolute;
+  right: 1%;
+  top: 50%;
+  background: url("/static/images/right.png") no-repeat;
+  background-position: 50% 50%;
+  background-size: .30rem .36rem;
+  width: .3rem;
+  height: .36rem;
+  display: block;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.cartEndWarp .lcationWarp {
+  display: flex;
+  min-height: 2rem;
+  border-bottom: .2rem solid #f2f2f2;
+}
+.cartEndWarp .lcationWarp .locationIcon {
+  flex: 0 0 1rem;
+  background: url("/static/images/locationIcon.png") no-repeat;
+  background-position: 50% 50%;
+  background-size: .41rem .41rem;
+}
+.cartEndWarp .lcationWarp .middle {
+  padding: .28rem 0 .32rem;
+  flex: 1;
+}
+.cartEndWarp .lcationWarp .middle.noLocation {
+  padding: 0!important;
+  line-height: 2rem;
+  color: #999999;
+  font-size: 15px;
+}
+.cartEndWarp .lcationWarp .middle .userInfo {
+  font-size: 15px;
+  color: #333333;
+  line-height: .5rem;
+}
+.cartEndWarp .lcationWarp .middle .userInfo .userName {
+  margin-right: 10px;
+}
+.cartEndWarp .lcationWarp .middle .locationTxt {
+  color: #999999;
+  line-height: .41rem;
+}
+.cartEndWarp .lcationWarp .rightIcon {
+  background: url("/static/images/right.png") no-repeat;
+  background-position: 35% 50%;
+  background-size: .30rem .36rem;
+  flex: 0 0 .8rem;
+}
+.cartEndWarp .dateWarp {
+  padding: 0 .26rem;
+  border-bottom: .2rem solid #f2f2f2;
+}
+.cartEndWarp .dateWarp .postTime {
+  padding: .4rem 0;
+  border-bottom: 1px solid #e6e6e6;
+  position: relative;
+  line-height: 1;
+}
+.cartEndWarp .dateWarp .postTime .t1 {
+  font-size: 15px;
+  color: #333333;
+  margin-bottom: .3rem;
+}
+.cartEndWarp .dateWarp .postTime .t1 .btns {
+  vertical-align: -2px;
+  display: inline-block;
+  font-size: 0;
+}
+.cartEndWarp .dateWarp .postTime .t1 .btns span {
+  display: inline-block;
+}
+.cartEndWarp .dateWarp .postTime .t1 .btns .btn {
+  width: .36rem;
+  height: .36rem;
+  line-height: .3rem;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 20px;
+  border-radius: 3px;
+}
+.cartEndWarp .dateWarp .postTime .t1 .btns .btn.le {
+  border: 2px solid #c942b3;
+  background: url("/static/images/minue.png") #ffffff;
+  background-repeat: no-repeat;
+  background-size: 80% 80%;
+  background-position: center center;
+}
+.cartEndWarp .dateWarp .postTime .t1 .btns .btn.re {
+  border: 2px solid #c942b3;
+  background: url("/static/images/addbtn.png") #c942b3;
+  background-repeat: no-repeat;
+  background-size: 80% 80%;
+  background-position: center center;
+}
+.cartEndWarp .dateWarp .postTime .t1 .btns .t3 {
+  width: 1rem;
+  line-height: .36rem;
+  font-size: 15px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: 5px;
+}
+.cartEndWarp .dateWarp .postTime .t1 .date {
+  margin-left: .22rem;
+  color: #c942b3;
+  font-weight: 600;
+}
+.cartEndWarp .dateWarp .postTime .t2 {
+  font-size: 11px;
+  color: #999999;
+}
+.cartEndWarp .commList {
+  padding: 0 .24rem;
+  border-bottom: .2rem solid #f2f2f2;
+}
+.cartEndWarp .commList .comItem {
+  overflow: hidden;
+  padding: .4rem 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+.cartEndWarp .commList .comItem:last-child {
+  border: none;
+}
+.cartEndWarp .commList .comItem img {
+  width: 1.6rem;
+  height: 1.6rem;
+  float: left;
+}
+.cartEndWarp .commList .comItem .txt {
+  padding-left: 1.9rem;
+}
+.cartEndWarp .commList .comItem .txt .title {
+  font-size: 15px;
+  color: #333333;
+  line-height: 1;
+  margin-bottom: .2rem;
+}
+.cartEndWarp .commList .comItem .txt .priceTxt {
+  color: #ffc62b;
+  font-size: 11px;
+  line-height: .4rem;
+}
+.cartEndWarp .isYes {
+  line-height: .88rem;
+  background: #ffffff;
+  padding-left: .24rem;
+  vertical-align: middle;
+  color: #999999;
+  font-size: 14px;
+  border-bottom: 3rem solid #f2f2f2;
+}
+.cartEndWarp .isYes .isduihao {
+  width: .4rem;
+  height: .4rem;
+  display: inline-block;
+  background: #c942b3;
+  border-radius: 50%;
+  vertical-align: -6px;
+  margin-right: .21rem;
+}
+.cartEndWarp .isYes .isduihao.active {
+  background: url("/static/images/isyes.png") no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+}
+.cartEndWarp .isYes .peo {
+  color: #c942b3;
+}
+.cartEndWarp .bottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 2rem;
+  background: #ffffff;
+  width: 100%;
+  border-top: 1px solid #e1e1e1;
+}
+.cartEndWarp .bottom .bottomInner {
+  height: 1.2rem;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+.cartEndWarp .bottom .bottomInner .sureBtn {
+  flex: 0 0 2.5rem;
+}
+.cartEndWarp .bottom .bottomInner .sureBtn span {
+  display: block;
+  width: 2.24rem;
+  line-height: .8rem;
+  color: #ffffff;
+  background: #c942b3;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: .2rem;
+  border-radius: 6px;
+  font-size: 15px;
+}
+.cartEndWarp .bottom .bottomInner .txt {
+  padding-left: .24rem;
+  line-height: 1;
+  flex: 1;
+}
+.cartEndWarp .bottom .bottomInner .txt .allprice {
+  padding-top: .26rem;
+  padding-bottom: .2rem;
+}
+.cartEndWarp .bottom .bottomInner .txt .allprice .title {
+  font-size: 13px;
+  color: #333333;
+}
+.cartEndWarp .bottom .bottomInner .txt .allprice .title i {
+  font-size: 15px;
+  color: #ffc62b;
+}
+.cartEndWarp .bottom .bottomInner .txt .mesg {
+  color: #999999;
+  font-size: 11px;
+}

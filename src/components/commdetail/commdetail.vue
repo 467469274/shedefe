@@ -72,7 +72,7 @@
 
       </div>
     </div>
-    <div class="cardItem bor2">
+    <div class="cardItem bor2" @click="godetail">
       <div class="inner">
         图文详情
       </div>
@@ -94,6 +94,7 @@
 </template>
 <script type="text/ecmascript-6">
   import { Swipe, SwipeItem } from 'mint-ui'
+  import detail from '../comm/detail.vue'
   export default{
     name: 'commdetail',
     data(){
@@ -125,6 +126,9 @@
           this.$router.push({path: '/index'});
         }
         console.log()
+      },
+      godetail(){
+        this.$router.push({path: '/detail/'+this.$route.params.id});
       },
       gocomment(){
         this.$router.push({path: '/comment/'+this.$route.params.id});

@@ -8,6 +8,11 @@ import order from '@/components/order/order';
 import commdetail from '@/components/commdetail/commdetail';
 import comment from '@/components/comment/comment';
 import commentDetail from '@/components/comment/commentDetail';
+import detail from '@/components/comm/detail';
+import empty from '@/components/empty/empty';
+import cartend from '@/components/cartend/cartend';
+import agreement from '@/components/agreement/agreement';
+import addLocation from '@/components/addLocation/addLocation';
 import Mint from 'mint-ui';
 
 Vue.use(Router);
@@ -21,6 +26,11 @@ export default new Router({
       name: 'main',
       component: main,
       children: [
+        {
+          path: '*',
+          name: 'index',
+          component: index
+        },
         {
           path: '/index',
           name: 'index',
@@ -59,8 +69,33 @@ export default new Router({
       component: commentDetail
     },
     {
+      path: '/detail/:id',
+      name: 'detail',
+      component: detail
+    },
+    {
+      path: '/empty',
+      name: 'empty',
+      component: empty
+    },
+    {
+      path: '/cartend/:type',
+      name: 'cartend',
+      component: cartend
+    },
+    {
+      path: '/agreement',
+      name: 'agreement',
+      component: agreement
+    },
+    {
+      path: '/addLocation',
+      name: 'addLocation',
+      component: addLocation
+    },
+    {
       path: '*',
-      component:index
+      component:empty
     }
   ]
 })

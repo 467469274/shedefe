@@ -1,0 +1,243 @@
+.cartEndWarp{
+  .mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+  }
+  .borderN{
+    border: none!important;
+  }
+  .iconRight{
+    position: absolute;
+    right:1%;
+    top: 50%;
+    background: url("/static/images/right.png") no-repeat;
+    background-position: 50% 50%;
+    background-size:.30rem .36rem;
+    width: .3rem;
+    height: .36rem;
+    display: block;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .lcationWarp{
+    display: flex;
+    min-height: 2rem;
+    border-bottom: .2rem solid #f2f2f2;
+    .locationIcon{
+      flex: 0 0 1rem;
+      background: url("/static/images/locationIcon.png") no-repeat;
+      background-position: 50% 50%;
+      background-size:.41rem .41rem;
+    }
+    .middle{
+      padding: .28rem 0 .32rem;
+      flex: 1;
+      &.noLocation{
+        padding: 0!important;
+        line-height: 2rem;
+        color: #999999;
+        font-size: 15px;
+      }
+      .userInfo{
+        font-size: 15px;
+        color: #333333;
+        line-height: .5rem;
+        .userName{
+          margin-right: 10px;
+        }
+      }
+      .locationTxt{
+        color: #999999;
+        line-height: .41rem;
+      }
+    }
+    .rightIcon{
+      background: url("/static/images/right.png") no-repeat;
+      background-position:35% 50%;
+      background-size:.30rem .36rem;
+      flex: 0 0 .8rem;
+    }
+  }
+  .dateWarp{
+    padding:0 .26rem;
+    border-bottom: .2rem solid #f2f2f2;
+    .postTime{
+      padding:.4rem 0;
+      border-bottom: 1px solid #e6e6e6;
+      position: relative;
+      line-height: 1;
+      .t1{
+        font-size: 15px;
+        color: #333333;
+        margin-bottom: .3rem;
+        .btns{
+          vertical-align: -2px;
+          display: inline-block;
+          font-size:0;
+          span{
+            display:inline-block;
+          }
+          .btn{
+            width: .36rem;
+            height: .36rem;
+            line-height: .3rem;
+            text-align: center;
+            box-sizing: border-box;
+            font-size:20px;
+            border-radius: 3px;
+            &.le{
+              border: 2px solid #c942b3;
+              background:url("/static/images/minue.png")#ffffff;
+              background-repeat:no-repeat;
+              background-size: 80% 80%;
+              background-position:center center;
+            }
+            &.re{
+              border: 2px solid #c942b3;
+              background:url("/static/images/addbtn.png") #c942b3;
+              background-repeat:no-repeat;
+              background-size: 80% 80%;
+              background-position:center center;
+            }
+          }
+          .t3{
+            width: 1rem;
+            line-height:.36rem;
+            font-size: 15px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: 5px;
+          }
+        }
+        .date{
+          margin-left: .22rem;
+          color: #c942b3;
+          font-weight: 600;
+        }
+      }
+      .t2{
+        font-size: 11px;
+        color: #999999;
+      }
+    }
+  }
+  .commList{
+    padding:0 .24rem;
+    border-bottom: .2rem solid #f2f2f2;
+    .comItem{
+      overflow: hidden;
+      padding:.4rem 0;
+      border-bottom: 1px solid #e6e6e6;
+      &:last-child{
+        border: none;
+      }
+      img{
+        width: 1.6rem;
+        height: 1.6rem;
+        float: left;
+      }
+      .txt{
+        padding-left: 1.9rem;
+        .title{
+          font-size: 15px;
+          color: #333333;
+          line-height: 1;
+          margin-bottom: .2rem;
+        }
+        .priceTxt{
+          color: #ffc62b;
+          font-size: 11px;
+          line-height: .4rem;
+        }
+      }
+    }
+  }
+  .isYes{
+    line-height: .88rem;
+    background: #ffffff;
+    padding-left: .24rem;
+    vertical-align: middle;
+    color: #999999;
+    font-size: 14px;
+    border-bottom:3rem solid #f2f2f2;
+    .isduihao{
+      width: .4rem;
+      height: .4rem;
+      display: inline-block;
+      background: #c942b3;
+      border-radius: 50%;
+      vertical-align: -6px;
+      margin-right: .21rem;
+      &.active{
+        background: url("/static/images/isyes.png") no-repeat;
+        background-size:100% 100%;
+        background-position: center center;
+      }
+    }
+    .peo{
+      color: #c942b3;
+    }
+  }
+  .bottom{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 2rem;
+    background: #ffffff;
+    width: 100%;
+    border-top: 1px solid #e1e1e1;
+    .bottomInner{
+      height: 1.2rem;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      .sureBtn{
+        flex:0 0 2.5rem;
+        span{
+          display: block;
+          width:2.24rem;
+          line-height: .8rem;
+          color: #ffffff;
+          background: #c942b3;
+          text-align: center;
+          margin: 0 auto;
+          margin-top: .2rem;
+          border-radius:6px;
+          font-size: 15px;
+        }
+      }
+      .txt{
+        padding-left: .24rem;
+        line-height: 1;
+        flex: 1;
+        .allprice{
+          padding-top: .26rem;
+          padding-bottom: .2rem;
+          .title{
+            font-size: 13px;
+            color: #333333;
+            i{
+              font-size: 15px;
+              color: #ffc62b;
+            }
+          }
+        }
+        .mesg{
+          color: #999999;
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+.cartWarp .cartItem {
+  padding: .4rem .23rem;
+  border-bottom: 1px solid #e6e6e6;
+  overflow: hidden;
+  background: #ffffff;
+}
+.cartWarp .cartItem img {
+  float: left;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+.cartWarp .cartItem .txt {
+  padding-left: 1.91rem;
+}
+.cartWarp .cartItem .txt .title {
+  font-size: 15px;
+  margin-bottom: .2rem;
+}
+.cartWarp .cartItem .txt .labas span {
+  padding: .1rem;
+  border: 1px solid #999999;
+  border-radius: 4px;
+  margin-right: .1rem;
+  margin-bottom: .1rem;
+  display: inline-block;
+  color: #999999;
+}
+.cartWarp .cartItem .txt .orderInfo {
+  vertical-align: bottom;
+}
+.cartWarp .cartItem .txt .orderInfo .price {
+  font-size: 15px;
+  color: #ffc62b;
+}
+.cartWarp .cartItem .txt .orderInfo .dayNum {
+  font-size: 10px;
+  color: #999999;
+}
+.cartWarp .cartItem .txt .orderInfo .del {
+  width: .35rem;
+  height: .4rem;
+  background: url("/static/images/del.png");
+  background-size: 100% 100%;
+  display: block;
+  float: right;
+}
+.cartWarp .closeAccount {
+  width: 95%;
+  margin: 0 auto;
+  line-height: .8rem;
+  border-radius: 5px;
+  color: #fff;
+  background: #c942b3;
+  text-align: center;
+  margin-top: 20px;
+}
+.cartWarp .empty {
+  line-height: 2rem;
+  text-align: center;
+  font-size: 15px;
+}

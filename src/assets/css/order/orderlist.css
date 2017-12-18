@@ -1,0 +1,140 @@
+.orderWarp .ordertabs {
+  display: flex;
+  border-bottom: 1px solid #e6e6e6;
+}
+.orderWarp .ordertabs .ordtab {
+  flex: 1;
+  border-bottom: .19rem solid #f2f2f2;
+}
+.orderWarp .ordertabs .ordtab.active .inner {
+  border-color: #c942b3;
+  color: #c942b3;
+}
+.orderWarp .ordertabs .ordtab .inner {
+  line-height: .84rem;
+  display: block;
+  width: 1rem;
+  margin: 0 auto;
+  border-bottom: 4px solid #fff;
+  text-align: center;
+}
+.orderWarp .orderList .orderItem {
+  border-bottom: .19rem solid #f2f2f2;
+}
+.orderWarp .orderList .orderItem .orderTop {
+  padding: 0 .25rem;
+  line-height: .88rem;
+  font-size: 14px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.orderWarp .orderList .orderItem .orderTop .orderNum {
+  color: #333333;
+}
+.orderWarp .orderList .orderItem .orderTop .orderType {
+  float: right;
+  color: #c942b3;
+}
+.orderWarp .orderList .orderItem .commList {
+  padding: 0 .23rem;
+}
+.orderWarp .orderList .orderItem .commList .commItem {
+  padding: .4rem 0;
+  border-bottom: 1px solid #e6e6e6;
+  overflow: hidden;
+  line-height: 1;
+}
+.orderWarp .orderList .orderItem .commList .commItem img {
+  width: 1.6rem;
+  height: 1.6rem;
+  float: left;
+}
+.orderWarp .orderList .orderItem .commList .commItem .txt {
+  padding-left: 1.91rem;
+}
+.orderWarp .orderList .orderItem .commList .commItem .txt .title {
+  font-size: 15px;
+  margin-bottom: .31rem;
+}
+.orderWarp .orderList .orderItem .commList .commItem .txt .t2 {
+  font-size: 11px;
+  color: #999999;
+  margin-bottom: .21rem;
+}
+.orderWarp .orderList .orderItem .commList .commItem:last-child {
+  border-bottom: 0;
+}
+.orderWarp .orderList .orderItem .orderInfo {
+  background: #fffcf5;
+  padding: 0 .3rem;
+  margin: 0 .24rem;
+  overflow: hidden;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop {
+  display: flex;
+  min-height: 2rem;
+  overflow: hidden;
+  border-bottom: 1px dashed #e6e6e6;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .kdj {
+  padding-top: .7rem!important;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .kdj .title {
+  line-height: 1;
+  color: #999999;
+  font-size: 11px;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .kdj .date {
+  color: #333333;
+  font-size: 13px;
+  margin-top: .2rem;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .kdj .day {
+  font-size: 14px;
+  color: #ffc62b;
+  text-align: center;
+  margin-top: .1rem;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .middle {
+  flex: 0 0 1.89rem;
+  padding: .1rem 0;
+  background-image: url("/static/images/middl.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .middle .title {
+  text-align: center;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .middle p {
+  padding-left: 6%;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .le {
+  flex: 1;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoTop .re {
+  flex: 1;
+  text-align: right;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoBottom {
+  line-height: .88rem;
+  font-size: 14px;
+}
+.orderWarp .orderList .orderItem .orderInfo .infoBottom .red {
+  color: #ffc62b;
+  margin-left: .2rem;
+}
+.orderWarp .orderList .orderItem .goOrder {
+  margin: .3rem .24rem 0 .24rem;
+  background: #c942b3;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: .72rem;
+  text-align: center;
+  border-radius: 5px;
+}
+.orderWarp .orderList .orderItem .mesg {
+  padding: 0 .24rem;
+  font-size: 13px;
+  color: #999999;
+  line-height: .96rem;
+}

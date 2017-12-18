@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router';
+import store from './store';
 import {ajpost,ajget} from './common/ajax.js';
 
 Vue.config.productionTip = false;
@@ -13,6 +14,7 @@ Vue.prototype.ajget = ajget;
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

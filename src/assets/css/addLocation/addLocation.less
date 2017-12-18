@@ -1,0 +1,84 @@
+.addLocation{
+  position: fixed;
+  background: #f2f2f2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  input,textarea{
+    background:none;
+    outline:none;
+    border:0px;
+  }
+  .locationList{
+    padding-left: .24rem;
+    background: #fff;
+    .locationItem{
+      line-height: .96rem;
+      border-bottom: 1px solid #e6e6e6;
+      display: flex;
+      font-size: 15px;
+      .tl{
+        flex:0 0 1.56rem;
+        color: #333333;
+      }
+      .in{
+        flex: 1;
+        padding:.2rem;
+      }
+    }
+    textarea{
+      resize:none;
+      height: 2.23rem;
+      width: 100%;
+      font-size: 15px;
+      padding: .2rem;
+      padding-left: 0;
+    }
+  }
+  .al{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: #ffffff;
+    width: 100%;
+    z-index: 2;
+    .operTip{
+      width: 100%;
+      display: flex;
+      text-align: center;
+      background: #fcfcfc;
+      line-height: .98rem;
+      .sure{
+        flex: 1;
+      }
+      .close{
+        flex: 1;
+      }
+    }
+    .picker-items{
+      width: 100%;
+    }
+  }
+  .mask{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    z-index:1;
+  }
+  .sureBtn{
+    width: 95%;
+    display: block;
+    background: #c942b3;
+    line-height: .96rem;
+    color: #ffffff;
+    font-size: 17px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 7px;
+    margin-top: 1rem;
+  }
+}

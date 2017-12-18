@@ -97,6 +97,7 @@
         MessageBox('提示', '操作成功');
       },
       loadMore() {
+        console.log(78)
         let _this = this;
         if (this.hasGood) {
           this.loading = true;
@@ -228,7 +229,6 @@
     created() {
       let _this = this;
       this.ajget('/api/getBanners', {}, function (data) {
-        console.log(data)
         _this.bannerList = data;
       }, function (err) {
         console.log(err)
@@ -247,7 +247,18 @@
       this.getGoods({
         page: _this.p,
         pagesize: _this.pz
-      })
+      });
+    },
+    mounted(){
+      let _this = this;
+      window.onscroll = function() {
+         var scrollTop = document.documentElement.scrollTop;
+        let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //浏览器高度
+        if (document.documentElement.scrollHeight-scrollTop == h){
+          _this.loadMore()
+        }
+      }
+      //scrollTop就是触发滚轮事件时滚轮的高度
     },
     computed: {
       top() {
