@@ -131,12 +131,15 @@
   getLocation(){
     let _this = this;
     _this.ajpost('/api/address', {type: 0}, function (data) {
-      _this.myAddressProvince = data.data.province
-      _this.myAddressCity = data.data.city
-      _this.myAddresscounty = data.data.area
-      _this.tex = data.data.address;
-      _this.tel = data.data.mobile;
-      _this.userName = data.data.name;
+      console.log(data.error_msg)
+      if(data.error_msg !='成功,但无数据'){
+        _this.myAddressProvince = data.data.province
+        _this.myAddressCity = data.data.city
+        _this.myAddresscounty = data.data.area
+        _this.tex = data.data.address;
+        _this.tel = data.data.mobile;
+        _this.userName = data.data.name;
+      }
     })
   }
   },

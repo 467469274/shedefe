@@ -1,9 +1,18 @@
 
-
+import {getCookie,setCookie} from './cookies.js';
 import axios from 'axios';
 var qs = require('qs');
 export function ajpost(url,data,call,err) {
-  data.token = '000';
+  var token = getCookie('token');
+  if(token == ''){
+    if(parseQueryString().token == 'undefined'){
+      window.location = ' http://shede.sinmore.vip/api/weixinLogin';
+      return;
+    }else {
+      setCookie('token',parseQueryString().token,1)
+    }
+  }
+  data.token = token;
   var postData  = qs.stringify(data);
   axios({
     method:'post',
@@ -20,7 +29,16 @@ export function ajpost(url,data,call,err) {
   });
 }
 export function ajget(url,data,call,err) {
-  data.token = '000';
+  var token = getCookie('token');
+  if(token == ''){
+    if(parseQueryString().token == 'undefined'){
+      window.location = ' http://shede.sinmore.vip/api/weixinLogin';
+      return;
+    }else {
+      setCookie('token',parseQueryString().token,1)
+    }
+  }
+  data.token = token;
   axios.get(`http://shede.sinmore.vip${url}`, {
     params:data
   }).then(function (response) {
@@ -28,4 +46,16 @@ export function ajget(url,data,call,err) {
   }).catch(function (error) {
     err(error);
   });
+}
+
+
+function parseQueryString() {
+  var url = window.location.hash
+  var json = {};
+  var arr = url.substr(url.indexOf('?') + 1).split('&');
+  arr.forEach(function(item) {
+    var tmp = item.split('=');
+    json[tmp[0]] = tmp[1];
+  })
+  return json;
 }

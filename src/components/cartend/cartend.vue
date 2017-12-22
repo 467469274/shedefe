@@ -4,7 +4,7 @@
     <orderStatus :orderType="1"></orderStatus>
     <div class="lcationWarp">
       <div class="locationIcon"></div>
-      <div class="middle" v-show="true">
+      <div class="middle" v-if="userName !='noLocation'">
         <p class="userInfo">
           <span class="userName">{{userName}}</span><span
           class="tel">{{tel}}</span>
@@ -13,7 +13,9 @@
           {{loca}}
         </p>
       </div>
-      <div class="middle noLocation" v-show="false" @click="golocation">
+      <div class="middle noLocation"
+           v-show="userName =='noLocation'"
+           @click="golocation">
         请输入收货地址...
       </div>
       <div class="rightIcon"></div>
@@ -46,7 +48,8 @@
     </div>
     <div class="commList">
       <div class="comItem"
-           v-for="(item,index) in gCartList" @click="goDetail(item.id)">
+           v-for="(item,index) in gCartList"
+           @click="goDetail(item.id)">
         <img :src="item.cover">
         <div class="txt">
           <p class="title">{{item.name}}</p>
@@ -111,9 +114,10 @@
         sDate: '2017-12-16',
         newDate: new Date(),
         isActive: false,
-        loca:'',
-        tel:'',
-        userName:''
+        loca: '',
+        tel: '',
+        userName: '',
+        gCartList:[]
       }
     },
     filters: {
@@ -125,6 +129,16 @@
       showDate(s){
         this.dateType = s;
         this.isShowDate = true;
+      },
+      getCartList(){
+        let _this = this;
+        _this.ajget('/api/cart', {
+          page: 1,
+          pagesize: 999
+        }, function (data) {
+          _this.gCartList = data;
+          console.log(data)
+        })
       },
       operDay(op){
         if (op == 'minus' && this.starNum != this.minStarNum) {
@@ -159,32 +173,33 @@
       },
       getLocation(){
         let _this = this;
-        _this.ajpost('/api/address',{type:0},function(data){
-          _this.loca = data.data.province+data.data.city+data.data.area+data.data.address;
-            _this.tel= data.data.mobile;
-            _this.userName= data.data.name;
+        _this.ajpost('/api/address', {type: 0}, function (data) {
+          if (data.error_msg != '成功,但无数据') {
+            _this.loca = data.data.province + data.data.city + data.data.area + data.data.address;
+            _this.tel = data.data.mobile;
+            _this.userName = data.data.name;
+          } else {
+            _this.userName = 'noLocation'
+          }
         })
       },
       goDetail(id){
-        this.$router.push({path: '/commdetail/'+id});
+        this.$router.push({path: '/commdetail/' + id});
       },
       sure(){
         let _this = this;
-//        _this.ajpost('/api/orderSubmit',{})orderSubmit
       }
     },
     created(){
-      if (this.$route.params.type == 1){
+      if (this.$route.params.type == 1) {
         this.isActive = false;
-      }else {
+      } else {
         this.isActive = true;
       }
-      this.getLocation()
+      this.getLocation();
+      this.getCartList()
     },
     computed: {
-      ...mapGetters([
-        "gCartList"
-      ]),
       endTime(){
         let nowDate = new Date(this.sDate);
         let endDate = this.endDat(nowDate, this.starNum);
@@ -193,8 +208,8 @@
       zj(){
         let num = 0;
         let list = JSON.parse(JSON.stringify(this.gCartList));
-        for(let i = 0;i<list.length;i++){
-          let n = parseInt(list[i].start_price)+(this.starNum-list[i].start_days)*list[i].keep_price
+        for (let i = 0; i < list.length; i++) {
+          let n = parseInt(list[i].start_price) + (this.starNum - list[i].start_days) * list[i].keep_price
           num = num + n;
         }
         return num;
@@ -202,7 +217,7 @@
       yj(){
         let num = 0;
         let list = JSON.parse(JSON.stringify(this.gCartList));
-        for(let i = 0;i<list.length;i++){
+        for (let i = 0; i < list.length; i++) {
           num = num + parseInt(list[i].deposit);
         }
         return num;

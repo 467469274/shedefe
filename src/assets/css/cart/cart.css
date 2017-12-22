@@ -1,3 +1,6 @@
+.cartWarp {
+  padding-bottom: 2rem;
+}
 .cartWarp .cartItem {
   padding: .4rem .23rem;
   border-bottom: 1px solid #e6e6e6;

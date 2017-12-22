@@ -51,7 +51,9 @@
               <span class="labal" v-for="(t,i) in item.goods_label">{{t}}</span>
             </div>
             <p class="allNum">{{item.sale_num}}人用过</p>
-            <p class="pirce"><i class="picNum">￥{{item.start_price}}</i><i class="starNum">/{{item.start_days}}天起</i>
+            <p class="pirce">
+              <i class="picNum">￥{{item.start_price}}</i><i class="starNum">/{{item.start_days}}天起</i>
+              <span class="addCart" @click.stop="addCart(item.id)"></span>
             </p>
           </div>
         </li>
@@ -224,6 +226,17 @@
       },
       godetail(n){
         this.$router.push({path: '/commdetail/'+n});
+      },
+      addCart(n){
+        let _this = this;
+        _this.ajpost('/api/cartAdd',{goods_id:n},function(data){
+          console.log(data)
+          if(data.error_msg == '加入购物车成功'){
+            MessageBox('提示', '添加成功');
+          }else if(data.error_msg == '购物车中已存在'){
+            MessageBox('提示', '购物车中已存在');
+          }
+        })
       }
     },
     created() {

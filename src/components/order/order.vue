@@ -15,7 +15,7 @@
       </div>
     </div>
     <ul class="orderList">
-      <li class="orderItem">
+      <li class="orderItem"@click="goDetail">
         <p class="orderTop">
           <span class="orderNum">订单号:&nbsp;&nbsp;&nbsp;2152033689721</span>
           <span class="orderType">待支付租金</span>
@@ -84,6 +84,9 @@
     methods: {
       check(n){
         this.type = n
+      },
+      goDetail(n){
+        this.$router.push({path: '/orderDetail/'+n});
       }
     }
   }

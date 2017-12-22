@@ -205,6 +205,19 @@
   font-size: 12px;
   color: #999999;
 }
+.indexWarp .indexMain .commList .item .itemMain .pirce .addCart {
+  width: .8rem;
+  height: .8rem;
+  background: url("/static/images/addcart.png") no-repeat;
+  background-size: 100% 100%;
+  -webkit-transform: translate(-17px, -16px);
+  -moz-transform: translate(-17px, -16px);
+  -ms-transform: translate(-17px, -16px);
+  -o-transform: translate(-17px, -16px);
+  transform: translate(-17px, -16px);
+  display: block;
+  float: right;
+}
 .indexWarp .indexMain .commList .more {
   line-height: .5rem;
   text-align: center;

@@ -13,7 +13,11 @@ import empty from '@/components/empty/empty';
 import cartend from '@/components/cartend/cartend';
 import agreement from '@/components/agreement/agreement';
 import addLocation from '@/components/addLocation/addLocation';
+import orderDetail from '@/components/order/orderDetail';
+import logistics from '@/components/logistics/logistics';
+import returnComm from '@/components/returnComm/returnComm';
 import Mint from 'mint-ui';
+
 
 Vue.use(Router);
 Vue.use(Mint);
@@ -92,6 +96,21 @@ export default new Router({
       path: '/addLocation',
       name: 'addLocation',
       component: addLocation
+    },
+    {
+      path: '/orderDetail/:id',
+      name: 'orderDetail',
+      component: orderDetail
+    },
+    {
+      path: '/logistics/:id',
+      name: 'logistics',
+      component: logistics
+    },
+    {
+      path: '/returnComm/:id',
+      name: 'returnComm',
+      component: returnComm
     },
     {
       path: '*',

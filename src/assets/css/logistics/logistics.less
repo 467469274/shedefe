@@ -1,0 +1,62 @@
+.logistics {
+  .top {
+    overflow: hidden;
+    padding: .23rem;
+    border-bottom: .2rem solid #f2f2f2;
+    margin-bottom: .4rem;
+    img {
+      float: left;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+    .wz {
+      padding-left: 1.5rem;
+      font-size: 13px;
+      line-height: .39rem;
+    }
+  }
+  .logisticsList {
+    .logisticsItme {
+      padding:0 .24rem;
+      display: flex;
+      margin-bottom: .57rem;
+      &:first-child{
+        .time{
+          &:before{
+            display: none;
+          }
+        }
+      }
+      .le {
+        flex: 0 0 2.4rem;
+        line-height: 1;
+        text-align: center;
+        .time {
+          font-size: 15px;
+          color: #333333;
+          margin-bottom: .19rem;
+          margin-top: .25rem;
+          position: relative;
+          &:before{
+            content: '';
+            width: 1px;
+            height: .8rem;
+            background: #cccccc;
+            position: absolute;
+            left: 50%;
+            top: -1rem;
+          }
+        }
+        .date {
+          font-size: 13px;
+          color: #999999;
+        }
+      }
+      .re {
+        line-height: .47rem;
+        padding-left: .3rem;
+        flex: 1;
+      }
+    }
+  }
+}
