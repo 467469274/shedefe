@@ -50,15 +50,15 @@
       <div class="comItem"
            v-for="(item,index) in gCartList"
            @click="goDetail(item.id)">
-        <img :src="item.cover">
+        <img :src="item.goods_pic">
         <div class="txt">
-          <p class="title">{{item.name}}</p>
+          <p class="title">{{item.goods_name}}</p>
           <p class="priceTxt">
-            租金:{{parseInt(item.start_price)
-            +(starNum-item.start_days)*item.keep_price}}
+            租金:{{parseInt(item.monthly_price)
+          + (starNum - item.start_days) * item.keep_price}}
           </p>
           <p class="priceTxt">
-            押金:{{item.deposit}}
+            押金:{{item.goods_deposit}}
           </p>
         </div>
       </div>
@@ -101,23 +101,24 @@
   import newmenber from '../newmenber/newmenber.vue'
   import orderStatus from '../orderStatus/orderStatus.vue'
   import {addz} from '../../common/addz.js';
-  import { DatetimePicker } from 'mint-ui';
-  import {mapState,mapActions,mapGetters} from 'vuex'
-  export default{
-    data(){
+  import {DatetimePicker} from 'mint-ui';
+  import {mapState, mapActions, mapGetters} from 'vuex'
+
+  export default {
+    data() {
       return {
         starNum: 20,
         minStarNum: 20,
         pickerVisible: '',
         isShowDate: false,
         dateType: '',
-        sDate: '2017-12-16',
+        sDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
         newDate: new Date(),
         isActive: false,
         loca: '',
         tel: '',
         userName: '',
-        gCartList:[]
+        gCartList: []
       }
     },
     filters: {
@@ -126,52 +127,52 @@
       }
     },
     methods: {
-      showDate(s){
+      showDate(s) {
         this.dateType = s;
         this.isShowDate = true;
       },
-      getCartList(){
+      getCartList() {
+//        /api/orderFirm
         let _this = this;
-        _this.ajget('/api/cart', {
-          page: 1,
-          pagesize: 999
-        }, function (data) {
-          _this.gCartList = data;
+        let cartId = _this.$route.params.cartID.split(',');
+        _this.ajpost('/api/orderFirm', {cart_id: cartId}, function (data) {
+          _this.gCartList = data.data.goods;
+          _this.starNum = data.data.min_day
           console.log(data)
         })
       },
-      operDay(op){
+      operDay(op) {
         if (op == 'minus' && this.starNum != this.minStarNum) {
           this.starNum = this.starNum - 1;
         } else if (op == 'add') {
           this.starNum = this.starNum + 1;
         }
       },
-      handleConfirm(k){
+      handleConfirm(k) {
         let date = new Date(k);
         this.sDate = date.getFullYear() + '-' + (parseInt(date.getMonth()) + 1) + '-' + date.getDate();
         this.cancelDate();
       },
-      cancelDate(){
+      cancelDate() {
         this.isShowDate = false;
       },
-      endDat(dd, AddDayCount){
+      endDat(dd, AddDayCount) {
         dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
         var y = dd.getFullYear();
         var m = (dd.getMonth() + 1) < 10 ? "0" + (dd.getMonth() + 1) : (dd.getMonth() + 1);//获取当前月份的日期，不足10补0
         var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();//获取当前几号，不足10补0
         return y + "-" + m + "-" + d;
       },
-      goagreement(){
+      goagreement() {
         this.$router.push({path: '/agreement'});
       },
-      seyYes(){
+      seyYes() {
         this.isActive = !this.isActive
       },
-      golocation(){
+      golocation() {
         this.$router.push({path: '/addLocation'});
       },
-      getLocation(){
+      getLocation() {
         let _this = this;
         _this.ajpost('/api/address', {type: 0}, function (data) {
           if (data.error_msg != '成功,但无数据') {
@@ -183,14 +184,23 @@
           }
         })
       },
-      goDetail(id){
+      goDetail(id) {
         this.$router.push({path: '/commdetail/' + id});
       },
-      sure(){
+      sure() {
         let _this = this;
+        let cartId = _this.$route.params.cartID.split(',');
+        _this.ajpost('/api/orderSubmit',
+          {cart_id: cartId, get_goods: _this.sDate, back_goods: _this.endTime, tenancy: _this.starNum}
+          , function (data) {
+            _this.ajpost('/api/WeixinHandler', {out_trade_no: data.data.order_sn, paytype: 1}, function (payData) {
+              console.log(payData)
+            });
+          }
+        )
       }
     },
-    created(){
+    created() {
       if (this.$route.params.type == 1) {
         this.isActive = false;
       } else {
@@ -200,25 +210,25 @@
       this.getCartList()
     },
     computed: {
-      endTime(){
+      endTime() {
         let nowDate = new Date(this.sDate);
         let endDate = this.endDat(nowDate, this.starNum);
         return endDate;
       },
-      zj(){
+      zj() {
         let num = 0;
         let list = JSON.parse(JSON.stringify(this.gCartList));
         for (let i = 0; i < list.length; i++) {
-          let n = parseInt(list[i].start_price) + (this.starNum - list[i].start_days) * list[i].keep_price
+          let n = parseInt(list[i].monthly_price) + (this.starNum - list[i].start_days) * list[i].keep_price
           num = num + n;
         }
         return num;
       },
-      yj(){
+      yj() {
         let num = 0;
         let list = JSON.parse(JSON.stringify(this.gCartList));
         for (let i = 0; i < list.length; i++) {
-          num = num + parseInt(list[i].deposit);
+          num = num + parseInt(list[i].goods_deposit);
         }
         return num;
       }
