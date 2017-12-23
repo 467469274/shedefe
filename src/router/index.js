@@ -83,7 +83,7 @@ export default new Router({
       component: empty
     },
     {
-      path: '/cartend/:type',
+      path: '/cartend/:type/:cartID',
       name: 'cartend',
       component: cartend
     },

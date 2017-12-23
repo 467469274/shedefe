@@ -37,22 +37,22 @@
 <script type="text/ecmascript-6">
   import newmenber from '../newmenber/newmenber.vue'
   import orderStatus from '../orderStatus/orderStatus.vue'
-  import {mapState,mapActions,mapGetters} from 'vuex'
+  import {mapState, mapActions, mapGetters} from 'vuex'
   import {Toast} from 'mint-ui';
-  export default{
-    data(){
+
+  export default {
+    data() {
       return {
         orderType: 1,
         gCartList: []
       }
     },
     computed: {},
-    created(){
+    created() {
       this.getCartList()
     },
     methods: {
-      gocartend(){
-//
+      gocartend() {
         let _this = this;
         let ars = [];
         for (let i = 0; i < this.gCartList.length; i++) {
@@ -60,16 +60,8 @@
         }
         ars = ars.join(',')
         _this.$router.push({path: '/cartend/'+ars});
-
-/*        _this.ajpost('/api/orderFirm', {cart_id: ars}, function (data) {
-          console.log(data)
-          if (data.error_msg == '成功') {
-          }
-        },function(err){
-          console.log(err)
-        })*/
       },
-      getCartList(){
+      getCartList() {
         let _this = this;
         _this.ajget('/api/cart', {
           page: 1,
@@ -79,7 +71,7 @@
           console.log(data)
         })
       },
-      adeComm(n){
+      adeComm(n) {
         let _this = this;
         _this.ajpost('/api/cartDel', {cart_id: n}, function (data) {
           if (data.error_msg == '删除成功') {

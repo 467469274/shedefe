@@ -233,8 +233,8 @@
           console.log(data)
           if(data.error_msg == '加入购物车成功'){
             MessageBox('提示', '添加成功');
-          }else if(data.error_msg == '购物车中已存在'){
-            MessageBox('提示', '购物车中已存在');
+          }else if(data.error_msg == '购物车中已存在，请勿重复添加'){
+            MessageBox('提示', '购物车中已存在，请勿重复添加');
           }
         })
       }
