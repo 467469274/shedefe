@@ -58,14 +58,16 @@
         for (let i = 0; i < this.gCartList.length; i++) {
           ars.push(this.gCartList[i].cart_id)
         }
-        _this.ajpost('/api/orderFirm', {cart_id: ars}, function (data) {
+        ars = ars.join(',')
+        _this.$router.push({path: '/cartend/'+ars});
+
+/*        _this.ajpost('/api/orderFirm', {cart_id: ars}, function (data) {
           console.log(data)
           if (data.error_msg == '成功') {
-//            _this.$router.push({path: '/cartend/1'});
           }
         },function(err){
           console.log(err)
-        })
+        })*/
       },
       getCartList(){
         let _this = this;
