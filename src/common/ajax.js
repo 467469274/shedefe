@@ -6,7 +6,7 @@ export function ajpost(url,data,call,err) {
   var token = getCookie('token');
   if(token == ''){
     if(parseQueryString().token == undefined){
-      window.location = ' http://shede.sinmore.vip/api/weixinLogin';
+      //window.location = ' http://shede.sinmore.vip/api/weixinLogin';
       return;
     }else {
       setCookie('token',parseQueryString().token,1);
@@ -30,11 +30,13 @@ export function ajpost(url,data,call,err) {
 }
 export function ajget(url,data,call,err) {
   var token = getCookie('token');
+  console.log(parseQueryString().token)
   if(token == ''){
     if(parseQueryString().token == undefined){
-      window.location = ' http://shede.sinmore.vip/api/weixinLogin';
+      //window.location = ' http://shede.sinmore.vip/api/weixinLogin';
       return;
     }else {
+      console.log(parseQueryString().token)
       setCookie('token',parseQueryString().token,1)
     }
   }

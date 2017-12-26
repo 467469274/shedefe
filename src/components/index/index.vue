@@ -99,7 +99,6 @@
         MessageBox('提示', '操作成功');
       },
       loadMore() {
-        console.log(78)
         let _this = this;
         if (this.hasGood) {
           this.loading = true;
@@ -113,7 +112,6 @@
       getGoods(obj, bol) {
         let _this = this;
         this.ajget('/api/getGoods', obj, function (data) {
-          console.log(data)
           let arss = [];
           for (let i = 0; i < data.length; i++) {
             let obj = data[i];
@@ -199,7 +197,6 @@
               }
             }
           }
-          console.log(obj.goods_label)
           this.getGoods(obj,true)
         }
         if (this.isAdd) {
@@ -230,7 +227,6 @@
       addCart(n){
         let _this = this;
         _this.ajpost('/api/cartAdd',{goods_id:n},function(data){
-          console.log(data)
           if(data.error_msg == '加入购物车成功'){
             MessageBox('提示', '添加成功');
           }else if(data.error_msg == '购物车中已存在，请勿重复添加'){

@@ -52,14 +52,16 @@
       this.getCartList()
     },
     methods: {
+      ...mapActions(['aars']),
       gocartend() {
         let _this = this;
         let ars = [];
         for (let i = 0; i < this.gCartList.length; i++) {
           ars.push(this.gCartList[i].cart_id)
         }
-        ars = ars.join(',')
-        _this.$router.push({path: '/cartend/'+ars});
+        ars = ars.join(',');
+        _this.aars(ars);
+        _this.$router.push({path: '/cartend'});
       },
       getCartList() {
         let _this = this;
