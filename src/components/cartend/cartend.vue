@@ -194,6 +194,7 @@
           {cart_id: cartId, get_goods: _this.sDate, back_goods: _this.endTime, tenancy: _this.starNum}
           , function (data) {
             _this.ajpost('/api/WeixinHandler', {out_trade_no: data.data.order_sn, paytype: 1}, function (payData) {
+              console.log(payData)
               let dataqq = JSON.parse(payData.data.status);
               console.log(dataqq)
               WeixinJSBridge.invoke(
