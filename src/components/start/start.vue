@@ -1,0 +1,47 @@
+<template>
+  <div class="startList">
+    <div class="startWarp">
+      <span class="start" @click.stop="clickStart(1)">12</span>
+      <span class="start" @click.stop="clickStart(2)">23</span>
+      <span class="start" @click.stop="clickStart(3)">45</span>
+      <span class="start" @click.stop="clickStart(4)">124</span>
+      <span class="start" @click.stop="clickStart(5)">124</span>
+    </div>
+    <div class="stbg" :style="{width:startSize}"></div>
+    <div class="grbg"></div>
+  </div>
+</template>
+<script type="text/ecmascript-6">
+    export default {
+      props:{
+        start:{
+          type:Number
+        },
+        isDis:{
+          type:String,
+          default() {
+            return 'false';
+          }
+        }
+      },
+      data(){
+        return{
+        }
+      },
+      methods:{
+        clickStart(n){
+          if(this.isDis !='false'){
+            this.start = n
+          }
+        }
+      },
+      computed:{
+        startSize(){
+          return this.start*0.32+'rem'
+        }
+      }
+    }
+</script>
+<style>
+  @import "../../assets/css/start/start.css";
+</style>

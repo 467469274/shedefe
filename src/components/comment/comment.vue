@@ -7,7 +7,10 @@
       <div class="commentItem" v-for="(item,index) in commentList" @click="goDetail(item.id)">
         <p class="itemTitle">
           <span class="userName">{{item.member_name}}</span>
-          <span class="time">{{item.created_at}}</span>
+          <span class="time">{{item.created_at |formatDate}}</span>
+        </p>
+        <p>
+          <start :start="item.star"></start><span style="vertical-align:5px;padding-left: 10px;">({{parseInt(item.star)}}.0)</span>
         </p>
         <p class="content">
           {{item.content}}
@@ -16,52 +19,64 @@
           <img :src=im class="imgItem" v-for="(im,ins) in item.pic_url">
         </div>
       </div>
-      <div class="empty">暂无评价</div>
+      <div class="empty"v-if="comlength==0">暂无评价</div>
     </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
-  export default{
-    data(){
-      return{
-        datas:{
-        },
-        comlength:0,
-        commentList:[
+  import start from '../start/start.vue'
+  import {formatDate} from '../../common/date';
+  export default {
+    filters: {
+      formatDate(time) {
+        if (time == 0){
+          return '-';
+        }
+        var date = new Date(time*1000);
+        return formatDate(date, 'yyyy-MM-dd hh:mm');
+      }},
+    data() {
+      return {
+        datas: {},
+        comlength: 0,
+        commentList: [
           {
-            member_name:'wqd',
-            created_at:'2017年12月14日23:55:14',
-            content:'呢哦IQ就我诶加气机我二姐',
-            pic_url:['/static/images/jjd.jpg']
+            member_name: 'wqd',
+            created_at: '2017年12月14日23:55:14',
+            content: '呢哦IQ就我诶加气机我二姐',
+            pic_url: ['/static/images/jjd.jpg']
           }
         ]
       }
     },
-    created(){
+    created() {
       this.getdata();
     },
-    methods:{
-      getdata(){
+    methods: {
+      getdata() {
         let _this = this;
-        _this.ajget('/api/allComments',{
-            page:1,
-            pagesize:100,
+        _this.ajget('/api/allComments', {
+            page: 1,
+            pagesize: 100,
             goods_id: _this.$route.params.id
           },
-          function(data){
+          function (data) {
             _this.datas = data;
+            console.log(data)
             _this.commentList = data.comments;
-            this.comlength = this.datas.goods.comments_count;
-          },function(){
+            _this.comlength = data.comments.length;
+          }, function () {
 
           })
       },
-      goDetail(id){
-        this.$router.push({path: '/commentDetail/'+id});
+      goDetail(id) {
+        this.$router.push({path: '/commentDetail/' + id});
       }
     },
-    computed:{
-    }
+    components: {
+      start
+    },
+    computed: {}
   }
 </script>
 <style>

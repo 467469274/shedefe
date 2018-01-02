@@ -127,6 +127,8 @@
   height: .7rem;
   text-align: center;
   border: 1px solid #ffffff;
+  outline: none;
+  -webkit-appearance: none;
 }
 .indexWarp .top .labalWarp .labalList .spanWarp .btns .re {
   flex: 1;

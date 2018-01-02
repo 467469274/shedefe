@@ -16,6 +16,7 @@ import addLocation from '@/components/addLocation/addLocation';
 import orderDetail from '@/components/order/orderDetail';
 import logistics from '@/components/logistics/logistics';
 import returnComm from '@/components/returnComm/returnComm';
+import payCall from '@/components/payCall/payCall';
 import Mint from 'mint-ui';
 
 
@@ -111,6 +112,11 @@ export default new Router({
       path: '/returnComm/:id',
       name: 'returnComm',
       component: returnComm
+    },
+    {
+      path: '/payCall/:id/:type',
+      name: 'payCall',
+      component: payCall
     },
     {
       path: '*',

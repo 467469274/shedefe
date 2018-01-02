@@ -1,14 +1,11 @@
-
 import {getCookie,setCookie} from './cookies.js';
 import axios from 'axios';
 var qs = require('qs');
 export function ajpost(url,data,call,err) {
   var token = getCookie('token');
-  if(token == ''){
+  if(token ==''){
     if(parseQueryString().token == undefined){
-      //eyJpdiI6ImtkTFBsU3dpVHM3MXJxcExhXC9FVXZ3PT0iLCJ2YWx1ZSI6ImVhNk5L
-      // setCookie('token','eyJpdiI6ImtkTFBsU3dpVHM3MXJxcExhXC9FVXZ3PT0iLCJ2YWx1ZSI6ImVhNk5L',1);
-      window.location = ' http://shede.sinmore.vip/api/weixinLogin';
+      // window.location = ' http://shede.sinmore.vip/api/weixinLogin';
       return;
     }else {
       setCookie('token',parseQueryString().token,1);
@@ -32,11 +29,9 @@ export function ajpost(url,data,call,err) {
 }
 export function ajget(url,data,call,err) {
   var token = getCookie('token');
-  console.log(parseQueryString().token)
   if(token == ''){
     if(parseQueryString().token == undefined){
-      // setCookie('token','eyJpdiI6ImtkTFBsU3dpVHM3MXJxcExhXC9FVXZ3PT0iLCJ2YWx1ZSI6ImVhNk5L',1);
-      window.location = 'http://shede.sinmore.vip/api/weixinLogin';
+      // window.location = ' http://shede.sinmore.vip/api/weixinLogin';
       return;
     }else {
       setCookie('token',parseQueryString().token,1);

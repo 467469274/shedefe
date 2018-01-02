@@ -1,5 +1,5 @@
 <template>
-  <div class="indexWarp">
+  <div class="indexWarp" ref="box">
     <div class="top" ref="top" :class="{'clickAdd':isAdd}">
       <mt-swipe :auto="4000" class="siwper">
         <mt-swipe-item :key="index" v-for="(item,index) in bannerList">
@@ -133,10 +133,10 @@
         }, function (err) {
           console.log(err)
         });
-        this.ajget('/api/getContentByPostion', obj, function (data) {
-          _this.prizeList = data;
-        }, function (err) {
-          console.log(err)
+        this.ajget('/api/getContentByPostion', {text_location:1}, function (datas) {
+          _this.prizeList = datas;
+        }, function (errs) {
+          console.log(errs)
         });
 
       },
@@ -261,9 +261,10 @@
     mounted(){
       let _this = this;
       window.onscroll = function() {
-         var scrollTop = document.documentElement.scrollTop;
-        let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; //浏览器高度
-        if (document.documentElement.scrollHeight-scrollTop == h){
+        let box = _this.$refs.box.scrollHeight;
+        let h = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        let wh = document.body.clientHeight;
+        if(box - h == wh){
           _this.loadMore()
         }
       }

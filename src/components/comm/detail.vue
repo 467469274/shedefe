@@ -1,16 +1,16 @@
 <template>
   <div class="detail">
     <div class="detailTop">
-      <img src="/static/images/jjd.jpg" alt="">
+      <img :src=pic alt="">
       <p class="sl">{{commdetail.name}}</p>
     </div>
-    <div class="tabs">
-      <div class="tab" @click="checkTab" :class="{'active':isDetail}">
+    <div class="tabssss">
+      <div class="detatab" @click="checkTab" :class="{'active':isDetail}">
         <span>
           商品详情
         </span>
       </div>
-      <div class="tab" @click="checkTab"  :class="{'active':!isDetail}">
+      <div class="detatab" @click="checkTab"  :class="{'active':!isDetail}">
         <span>
           服务流程
         </span>
@@ -26,7 +26,8 @@
     data(){
       return{
         isDetail:true,
-        commdetail:{}
+        commdetail:{},
+        pic:''
       }
     },
     created(){
@@ -38,7 +39,7 @@
         this.ajget('/api/goodsDetail', {goods_id: _this.$route.params.id}, function (data) {
           console.log(data);
           _this.commdetail = data;
-
+          _this.pic = data.pic[0]
         })
       },
       checkTab(){

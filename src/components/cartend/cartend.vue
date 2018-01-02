@@ -54,7 +54,7 @@
         <div class="txt">
           <p class="title">{{item.goods_name}}</p>
           <p class="priceTxt">
-            租金:{{parseInt(item.monthly_price)
+            租金:{{parseInt(item.start_price)
           + (starNum - item.start_days) * item.keep_price}}
           </p>
           <p class="priceTxt">
@@ -208,7 +208,15 @@
                   timeStamp:dataqq.timeStamp
                 },
                 function(res){
-                  console.log(res)
+                  console.log(res);
+                  let call = res.err_msg;
+                  if(call == 'get_brand_wcpay_request:ok'){
+                    window.location='/#/payCall/'+data.data.order_sn+'/'+'success'
+                  }else if(call == 'get_brand_wcpay_request:cancel'){
+                    window.location='/#/payCall/'+data.data.order_sn+'/'+''+1+''
+                  }else{
+                    window.location='/#/payCall/'+data.data.order_sn+'/'+''+1+''
+                  }
                 });
             },function(err){console.log(err)});
           }
@@ -234,7 +242,7 @@
         let num = 0;
         let list = JSON.parse(JSON.stringify(this.gCartList));
         for (let i = 0; i < list.length; i++) {
-          let n = parseInt(list[i].monthly_price) + (this.starNum - list[i].start_days) * list[i].keep_price
+          let n = parseInt(list[i].start_price) + (this.starNum - list[i].start_days) * list[i].keep_price
           num = num + n;
         }
         return num;

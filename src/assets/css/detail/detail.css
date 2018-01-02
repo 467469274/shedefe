@@ -17,22 +17,23 @@
 }
 .detail .detailTop img {
   flex: 0 0 1.2rem;
+  width: 1.2rem;
   height: 1.2rem;
   margin-right: .3rem;
 }
-.detail .tabs {
+.detail .tabssss {
   height: .91rem;
   border-bottom: 1px solid #e6e6e6;
   display: flex;
 }
-.detail .tabs .tab {
+.detail .tabssss .detatab {
   flex: 1;
 }
-.detail .tabs .tab.active span {
+.detail .tabssss .detatab.active span {
   color: #c942b3;
   border-color: #c942b3;
 }
-.detail .tabs .tab span {
+.detail .tabssss .detatab span {
   text-align: center;
   font-size: 15px;
   color: #333333;

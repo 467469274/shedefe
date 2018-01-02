@@ -20,7 +20,7 @@
              <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
              <p class="itemTxt">形形色色</p>
            </div>
-           <div class="item" @click.stop="gos(3)">
+           <div class="item" @click.stop="goCart">
              <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
              <p class="itemTxt">购物车</p>
            </div>
@@ -63,13 +63,13 @@
         </p>
       </div>
     </div>
-    <div class="strategy">
+    <div class="strategy" v-show="hasgl" @click="isShowgl = !isShowgl">
       <img src="/static/images/shoubashou_03.png" alt="">
     </div>
     <div class="cardItem" @click="gocomment">
       <div class="inner borderbo">
         综合评价
-
+        <span style="float: right;margin-right:.4rem;padding-top: .05rem;margin-left: 10px">({{parseInt(comm.star)}})</span><start :start="comm.star"  style="float: right;margin-top: .3rem;"></start>
       </div>
     </div>
     <div class="cardItem bor2" @click="godetail">
@@ -81,27 +81,42 @@
       *支付租金即预约，发货前支付押金
     </div>
     <div class="bottom">
-      <div class="cart">
+      <div class="cart" @click="goCart">
         <span class="iconsss"></span>
         <p class="txt">购物车</p>
       </div>
       <div class="r">
-        <span class="btn">加入购物车</span>
-        <span class="btn" style="background: #c942b3">立即预约</span>
+        <span class="btn" style="background: #c942b3" @click="addCart">加入购物车</span>
+        <!--<span class="btn" style="background: #c942b3" @click="payNow">立即预约</span>-->
       </div>
+    </div>
+    <div class="thers" v-show="isShowgl" @click="isShowgl = !isShowgl">
+      <p class="theTittle">使用攻略</p>
+      <div class="detailOver">
+        <!--itesm.study_url-->
+        <p v-for="(itesm,indexs) in gl" @click.stop="got(itesm.study_url)">
+          {{itesm.study_name}}
+        </p>
+      </div>
+      <div class="backBtn">返回</div>
     </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import { Swipe, SwipeItem } from 'mint-ui'
+  import { Swipe, SwipeItem,MessageBox } from 'mint-ui'
   import detail from '../comm/detail.vue'
+  import {mapState, mapActions, mapGetters} from 'vuex'
+  import start from '../start/start.vue'
   export default{
     name: 'commdetail',
     data(){
       return {
         picList: [],
         comm: {},
-        isShow:false
+        isShow:false,
+        gl:[],
+        hasgl:false,
+        isShowgl:false
       }
     },
     created(){
@@ -109,17 +124,27 @@
       this.getData()
     },
     methods: {
+      ...mapActions(['aars']),
       getData(){
         let _this = this;
         this.ajget('/api/goodsDetail', {goods_id: _this.$route.params.id}, function (data) {
-          console.log(data);
-          data.lname = data.lname.split(",")
+          data.lname = data.lname.split(",");
           _this.comm = data;
-
+        })
+        this.ajget('/api/study', {goods_id: _this.$route.params.id}, function (data) {
+          _this.gl = data;
+          console.log(data)
+          if(data.length>0){
+            _this.hasgl = true
+          }
         })
       },
       isShowFun(){
         this.isShow = !this.isShow
+      },
+      got(url){
+        console.log()
+        window.location= ''+url
       },
       gos(n){
         if(n == 1){
@@ -132,7 +157,27 @@
       },
       gocomment(){
         this.$router.push({path: '/comment/'+this.$route.params.id});
+      },
+      payNow(){
+        this.aars(this.$route.params.id);
+        this.$router.push({path: '/cartend'});
+      },
+      addCart(){
+        let _this = this;
+        _this.ajpost('/api/cartAdd',{goods_id:_this.$route.params.id},function(data){
+          if(data.error_msg == '加入购物车成功'){
+            MessageBox('提示', '添加成功');
+          }else if(data.error_msg == '购物车中已存在，请勿重复添加'){
+            MessageBox('提示', '购物车中已存在，请勿重复添加');
+          }
+        })
+      },
+      goCart(){
+        window.location='/#/cart'
       }
+    },
+    components:{
+      start
     }
   }
 </script>
