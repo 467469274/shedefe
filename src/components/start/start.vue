@@ -17,10 +17,19 @@
         start:{
           type:Number
         },
+        zin:{
+          type:Number
+        },
         isDis:{
           type:String,
           default() {
             return 'false';
+          }
+        },
+        size:{
+          type:String,
+          default() {
+            return 'small';
           }
         }
       },
@@ -30,14 +39,19 @@
       },
       methods:{
         clickStart(n){
+          let _this =this;
           if(this.isDis !='false'){
-            this.start = n
+            this.$emit('addStart',{StarNum:n,index:_this.zin})
           }
         }
       },
       computed:{
         startSize(){
-          return this.start*0.32+'rem'
+          if(this.size == 'small'){
+            return this.start*0.32+'rem'
+          }else {
+            return this.start*0.71+'rem'
+          }
         }
       }
     }
