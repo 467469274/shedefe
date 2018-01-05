@@ -134,7 +134,6 @@
       getCartList() {
         let _this = this;
         let cartId = this.gars.split(',');
-        alert(cartId)
         _this.ajpost('/api/orderFirm', {cart_id: cartId}, function (data) {
           _this.gCartList = data.data.goods;
           _this.starNum = data.data.min_day
@@ -161,7 +160,7 @@
         var y = dd.getFullYear();
         var m = (dd.getMonth() + 1) < 10 ? "0" + (dd.getMonth() + 1) : (dd.getMonth() + 1);//获取当前月份的日期，不足10补0
         var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();//获取当前几号，不足10补0
-        return y + "-" + m + "-" + d;
+        return y + "/" + m + "/" + d;
       },
       goagreement() {
         this.$router.push({path: '/agreement'});
@@ -234,7 +233,8 @@
     },
     computed: {
       endTime() {
-        let nowDate = new Date(this.sDate);
+        let date = this.sDate.replace(/-/g,'/')
+        let nowDate = new Date(date);
         let endDate = this.endDat(nowDate, this.starNum);
         return endDate;
       },
