@@ -1,5 +1,12 @@
 .agreementWarp {
   padding: 0 .24rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 1231231231231231;
 }
 .agreementWarp .title {
   font-size: 17px;

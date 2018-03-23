@@ -18,13 +18,16 @@ import logistics from '@/components/logistics/logistics';
 import returnComm from '@/components/returnComm/returnComm';
 import payCall from '@/components/payCall/payCall';
 import usercomment from '@/components/comment/usercomment';
+import addDay from '@/components/order/addDay';
+import innerDetail from '@/components/innerDetail/innerDetail';
 import Mint from 'mint-ui';
 
 
 Vue.use(Router);
 Vue.use(Mint);
 
-export default new Router({
+export default new Router(
+  {
   linkActiveClass: 'active',
   routes: [
     {
@@ -100,7 +103,7 @@ export default new Router({
       component: addLocation
     },
     {
-      path: '/orderDetail/:id',
+      path: '/orderDetail',
       name: 'orderDetail',
       component: orderDetail
     },
@@ -115,7 +118,7 @@ export default new Router({
       component: returnComm
     },
     {
-      path: '/payCall/:id/:type',
+      path: '/payCall',
       name: 'payCall',
       component: payCall
     },
@@ -123,6 +126,16 @@ export default new Router({
       path: '/usercomment/:id',
       name: 'usercomment',
       component: usercomment
+    },
+    {
+      path: '/addDay',
+      name: 'addDay',
+      component: addDay
+    },
+    {
+      path: '/innerDetail/:id',
+      name: 'innerDetail',
+      component: innerDetail
     },
     {
       path: '*',

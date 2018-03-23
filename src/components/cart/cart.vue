@@ -2,7 +2,7 @@
   <div class="cartWarp">
     <newmenber></newmenber>
     <orderStatus :orderType="1"></orderStatus>
-    <div :key="index" v-for="(item,index) in gCartList"
+    <div :key="index" v-for="(item,index) in gCartList" @click="gocomm(item)"
          class="cartItem">
       <img :src=item.cover alt="">
       <div class="txt">
@@ -21,7 +21,7 @@
             /{{item.start_days}}天起租
           </span>
           <span class="del"
-                @click="adeComm(item.cart_id)"></span>
+                @click.stop="adeComm(item.cart_id)"></span>
         </p>
       </div>
     </div>
@@ -49,7 +49,8 @@
     },
     computed: {},
     created() {
-      this.getCartList()
+      this.getCartList();
+      document.title = '购物车';
     },
     methods: {
       ...mapActions(['aars']),
@@ -81,7 +82,12 @@
             _this.getCartList()
           }
         })
+      },
+      gocomm(s){
+        console.log(s)
+        window.location='/#/commdetail/'+s.goods_id
       }
+//
     },
     components: {
       newmenber,

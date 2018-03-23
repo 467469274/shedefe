@@ -18,7 +18,7 @@
            </div>
            <div class="item" @click.stop="gos(2)">
              <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
-             <p class="itemTxt">形形色色</p>
+             <p class="itemTxt">行行摄摄</p>
            </div>
            <div class="item" @click.stop="goCart">
              <p class="itemIcon"><img src="/static/images/loa.png" alt=""></p>
@@ -37,7 +37,7 @@
         {{comm.name}}
       </p>
       <p class="numMen">
-        {{comm.sale_num}}人用过
+        {{comm.sale_num+comm.attach_sale_num}}人用过
       </p>
       <div class="labalList">
         <span v-for="(item,index) in comm.lname">{{item}}</span>
@@ -66,21 +66,22 @@
     <div class="strategy" v-show="hasgl" @click="isShowgl = !isShowgl">
       <img src="/static/images/shoubashou_03.png" alt="">
     </div>
-    <div class="cardItem" @click="gocomment">
-      <div class="inner borderbo">
-        综合评价
-        <span style="float: right;margin-right:.4rem;padding-top: .05rem;margin-left: 10px">({{parseInt(comm.star)}})</span><start :start="comm.star"  style="float: right;margin-top: .3rem;"></start>
+    <div class="cardItem" @click="gocomment" style="border-top: 9px solid rgb(242,242,242);border-bottom: 9px solid rgb(242,242,242);" >
+      <div class="inner borderbo" style="overflow: hidden;font-size: 12px;color:rgb(166,166,166);border: none">
+        <span style="margin-right:.4rem;padding-top: .05rem;margin-left: 10px">(&nbsp;{{parseInt(comm.star)}}.0&nbsp;)</span>
+        <start :start="parseInt(comm.star)"  style="float:left;margin-top: .3rem;"></start>
+        <span style="float: right;margin-right: 10px;">{{comNum}}人评价</span>
       </div>
     </div>
-    <div class="cardItem bor2" @click="godetail">
+    <!--<div class="cardItem bor2" @click="godetail">
       <div class="inner">
         图文详情
       </div>
-    </div>
+    </div>-->
     <div class="mesg">
       *支付租金即预约，发货前支付押金
     </div>
-    <div class="bottom">
+    <div class="bottom" style="position: fixed;left: 0;bottom: 0;width: 100%;background: #ffffff;z-index: 9989">
       <div class="cart" @click="goCart">
         <span class="iconsss"></span>
         <p class="txt">购物车</p>
@@ -100,6 +101,23 @@
       </div>
       <div class="backBtn">返回</div>
     </div>
+    <div class="detail">
+      <div class="tabssss">
+        <div class="detatab" @click="checkTab" :class="{'active':isDetail}">
+        <span>
+          商品详情
+        </span>
+        </div>
+        <!--<div class="detatab" @click="checkTab"  :class="{'active':!isDetail}">
+        <span>
+          服务流程
+        </span>
+        </div>-->
+      </div>
+      <div class="detailWarp" v-html="commdetail.detail" v-show="isDetail">
+
+      </div>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -116,12 +134,28 @@
         isShow:false,
         gl:[],
         hasgl:false,
-        isShowgl:false
+        isShowgl:false,
+        comNum:0,
+        isDetail:true,
+        commdetail:{},
+        pic:''
       }
     },
     created(){
-      document.documentElement.scrollTop = 0;
-      this.getData()
+      document.title = '商品详情';
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      this.getData();
+      let _this = this;
+      _this.ajget('/api/allComments', {
+          page: 1,
+          pagesize: 100,
+          goods_id: _this.$route.params.id
+        },
+        function (data) {
+        this.comNum = data.comments.length;
+        }, function () {
+
+        });
     },
     methods: {
       ...mapActions(['aars']),
@@ -130,10 +164,11 @@
         this.ajget('/api/goodsDetail', {goods_id: _this.$route.params.id}, function (data) {
           data.lname = data.lname.split(",");
           _this.comm = data;
+          _this.commdetail = data;
+          _this.pic = data.pic[0]
         })
         this.ajget('/api/study', {goods_id: _this.$route.params.id}, function (data) {
           _this.gl = data;
-          console.log(data)
           if(data.length>0){
             _this.hasgl = true
           }
@@ -149,16 +184,17 @@
       gos(n){
         if(n == 1){
           this.$router.push({path: '/index'});
+        }else if(n == 2){
+          window.location = 'http://mp.weixin.qq.com/mp/homepage?__biz=MzI2MTgwMjQ4OA==&hid=1&sn=299cba68043bf8a6fc6911e004297bda&scene=18#wechat_redirect'
+        }else if(n == 4){
+          this.$router.push({path: '/order'});
         }
-        console.log()
-      },
-      godetail(){
-        this.$router.push({path: '/detail/'+this.$route.params.id});
       },
       gocomment(){
         this.$router.push({path: '/comment/'+this.$route.params.id});
       },
       payNow(){
+        console.log(this.$route.params.id)
         this.aars(this.$route.params.id);
         this.$router.push({path: '/cartend'});
       },
@@ -174,6 +210,9 @@
       },
       goCart(){
         window.location='/#/cart'
+      },
+      checkTab(){
+        this.isDetail = !this.isDetail
       }
     },
     components:{
@@ -183,4 +222,5 @@
 </script>
 <style>
   @import "../../assets/css/commdetail/commdetail.css";
+  @import "../../assets/css/detail/detail.css";
 </style>

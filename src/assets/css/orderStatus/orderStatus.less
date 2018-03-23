@@ -3,9 +3,11 @@
   display: flex;
   padding:.4rem 0 .3rem 0;
   border-bottom: .2rem solid #f2f2f2;
+  position: relative;
   .statusItem{
     flex: 1;
     text-align: center;
+    z-index: 123123;
     &.active{
       .icon{
         background-image: url("/static/images/in.png");
@@ -23,11 +25,28 @@
       background-image: url("/static/images/no.png");
       background-size:.72rem .72rem;
       background-repeat: no-repeat;
+      background-color: #ffffff;
+      z-index: 12312;
     }
     .title{
       line-height: .49rem;
       font-size: 14px;
       color: #b7b3bc;
     }
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 1px;
+    background: #ccc;
+    left: 50%;
+    top: 40%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index:0;
   }
 }

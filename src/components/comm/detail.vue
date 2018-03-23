@@ -31,7 +31,8 @@
       }
     },
     created(){
-      this.getData()
+      this.getData();
+      document.title = '图文详情'
     },
     methods:{
       getData(){

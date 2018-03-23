@@ -40,16 +40,11 @@
         datas: {},
         comlength: 0,
         commentList: [
-          {
-            member_name: 'wqd',
-            created_at: '2017年12月14日23:55:14',
-            content: '呢哦IQ就我诶加气机我二姐',
-            pic_url: ['/static/images/jjd.jpg']
-          }
         ]
       }
     },
     created() {
+      document.title = '评论'
       this.getdata();
     },
     methods: {

@@ -37,7 +37,7 @@
                   @click="operDay('add')"></span>
           </div>
         </div>
-        <p class="t2">商品最低7天起租</p>
+        <p class="t2">商品最低{{minStarNum}}天起租</p>
       </div>
       <div class="postTime borderN">
         <p class="t1">发还日期： <span class="date"
@@ -95,15 +95,16 @@
     </div>
     <div class="mask" v-show="isShowDate"
          @click="isShowDate =false"></div>
+    <argg v-on:isGrey="hasGru" v-show="showGru"></argg>
   </div>
 </template>
 <script type="text/ecmascript-6">
   import newmenber from '../newmenber/newmenber.vue'
   import orderStatus from '../orderStatus/orderStatus.vue'
   import {addz} from '../../common/addz.js';
-  import {DatetimePicker} from 'mint-ui';
+  import {DatetimePicker,Toast} from 'mint-ui';
   import {mapState, mapActions, mapGetters} from 'vuex'
-
+  import argg from '../agreement/agreement.vue'
   export default {
     data() {
       return {
@@ -118,7 +119,8 @@
         loca: '',
         tel: '',
         userName: '',
-        gCartList: []
+        gCartList: [],
+        showGru:false
       }
     },
     filters: {
@@ -127,21 +129,31 @@
       }
     },
     methods: {
+      ...mapActions(['apar']),
       showDate(s) {
         this.dateType = s;
         this.isShowDate = true;
       },
+      hasGru(data){
+        this.isActive = true;
+        this.showGru = false;
+      },
       getCartList() {
         let _this = this;
         let cartId = this.gars.split(',');
+        console.log(cartId)
         _this.ajpost('/api/orderFirm', {cart_id: cartId}, function (data) {
+          if(data.error_code == 1){
+            Toast('商品有误，请重新选择商品');
+//            window.location = '/#/cart'
+          }
           _this.gCartList = data.data.goods;
-          _this.starNum = data.data.min_day
-          console.log(data)
+          _this.starNum = data.data.min_day;
+          _this.minStarNum = data.data.min_day;
         })
       },
       operDay(op) {
-        if (op == 'minus' && this.starNum != this.minStarNum) {
+        if (op == 'minus' && this.starNum > this.minStarNum) {
           this.starNum = this.starNum - 1;
         } else if (op == 'add') {
           this.starNum = this.starNum + 1;
@@ -160,10 +172,10 @@
         var y = dd.getFullYear();
         var m = (dd.getMonth() + 1) < 10 ? "0" + (dd.getMonth() + 1) : (dd.getMonth() + 1);//获取当前月份的日期，不足10补0
         var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();//获取当前几号，不足10补0
-        return y + "/" + m + "/" + d;
+        return y + "-" + m + "-" + d;
       },
       goagreement() {
-        this.$router.push({path: '/agreement'});
+        this.showGru = true;
       },
       seyYes() {
         this.isActive = !this.isActive
@@ -188,14 +200,21 @@
       },
       sure() {
         let _this = this;
+        if(this.isActive == false){
+          Toast('请同意用户协议')
+          return
+        }
+        if(this.userName =='noLocation'){
+          Toast('请选择收货地址')
+          return
+        }
         let cartId = _this.gars.split(',');
         _this.ajpost('/api/orderSubmit',
           {cart_id: cartId, get_goods: _this.sDate, back_goods: _this.endTime, tenancy: _this.starNum}
           , function (data) {
+          console.log(data.data.order_sn);
             _this.ajpost('/api/WeixinHandler', {out_trade_no: data.data.order_sn, paytype: 1}, function (payData) {
-              console.log(payData)
               let dataqq = JSON.parse(payData.data.status);
-              console.log(dataqq)
               WeixinJSBridge.invoke(
                 'getBrandWCPayRequest',
                 {
@@ -207,14 +226,19 @@
                   timeStamp:dataqq.timeStamp
                 },
                 function(res){
-                  console.log(res);
                   let call = res.err_msg;
                   if(call == 'get_brand_wcpay_request:ok'){
-                    window.location='/#/payCall/'+data.data.order_sn+'/'+'success'
+                    let ke = data.data.order_sn+','+'success'
+                    _this.apar(ke);
+                    window.location='/#/payCall'
                   }else if(call == 'get_brand_wcpay_request:cancel'){
-                    window.location='/#/payCall/'+data.data.order_sn+'/'+''+1+''
+                    let ke = data.data.order_sn+','+''+1+''
+                    _this.apar(ke);
+                    window.location='/#/payCall'
                   }else{
-                    window.location='/#/payCall/'+data.data.order_sn+'/'+''+1+''
+                    let ke = data.data.order_sn+','+''+1+''
+                    _this.apar(ke);
+                    window.location='/#/payCall'
                   }
                 });
             },function(err){console.log(err)});
@@ -223,17 +247,16 @@
       }
       },
     created() {
-      if (this.$route.params.type == 1) {
-        this.isActive = false;
-      } else {
-        this.isActive = true;
-      }
       this.getLocation();
-      this.getCartList()
+      this.getCartList();
+      document.title = '确认订单';
+      let date = this.sDate.replace(/-/g,'/');
+      let nowDate = new Date(date);
+      this.sDate = this.endDat(nowDate,3);
     },
     computed: {
       endTime() {
-        let date = this.sDate.replace(/-/g,'/')
+        let date = this.sDate.replace(/-/g,'/');
         let nowDate = new Date(date);
         let endDate = this.endDat(nowDate, this.starNum);
         return endDate;
@@ -242,7 +265,7 @@
         let num = 0;
         let list = JSON.parse(JSON.stringify(this.gCartList));
         for (let i = 0; i < list.length; i++) {
-          let n = parseInt(list[i].start_price) + (this.starNum - list[i].start_days) * list[i].keep_price
+          let n = parseInt(list[i].start_price) + (this.starNum - list[i].start_days) * list[i].keep_price;
           num = num + n;
         }
         return num;
@@ -259,7 +282,8 @@
     },
     components: {
       newmenber,
-      orderStatus
+      orderStatus,
+      argg
     }
   }
 </script>

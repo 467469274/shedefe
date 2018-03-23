@@ -3,19 +3,19 @@
     <div class="top" ref="top" :class="{'clickAdd':isAdd}">
       <mt-swipe :auto="4000" class="siwper">
         <mt-swipe-item :key="index" v-for="(item,index) in bannerList">
-          <img :src="'http://shede.sinmore.vip/storage/banner/'+item.pic_url" alt="">
+          <img :src="'http://shede.sinmore.vip/storage/banner/'+item.pic_url" alt="" @click="lookBanner(item)">
         </mt-swipe-item>
       </mt-swipe>
       <div class="scroll-wrap">
         <ul class="scroll-content" :style="{ top }">
-          <li :key="index" v-for="(item,index) in prizeList">
+          <li :key="index" v-for="(item,index) in prizeList" @click="gourl(item)">
             <i class="icons-laba"></i>
             <p>{{item.title}}</p>
-            <a href="">戳此查看>></a>
+            <a>戳此查看>></a>
           </li>
         </ul>
       </div>
-      <div class="labalWarp">
+      <div class="labalWarp" v-show="labalList.length>0">
         <p class="title">
           Hello！您想要？
         </p>
@@ -50,7 +50,7 @@
             <div class="labalList">
               <span class="labal" v-for="(t,i) in item.goods_label">{{t}}</span>
             </div>
-            <p class="allNum">{{item.sale_num}}人用过</p>
+            <p class="allNum">{{item.sale_num+item.attach_sale_num}}人用过</p>
             <p class="pirce">
               <i class="picNum">￥{{item.start_price}}</i><i class="starNum">/{{item.start_days}}天起</i>
               <span class="addCart" @click.stop="addCart(item.id)"></span>
@@ -86,13 +86,6 @@
       }
     },
     mounted() {
-      setInterval(_ => {
-        if (this.activeIndex < this.prizeList.length - 1) {
-          this.activeIndex += 1;
-        } else {
-          this.activeIndex = 0;
-        }
-      }, 5000);
     },
     methods: {
       all() {
@@ -109,9 +102,19 @@
           });
         }
       },
+      gourl(r){
+        if(r.link){
+          window.location = r.link
+        }else {
+          window.location = '/#/innerDetail/'+r.id
+        }
+      },
       getGoods(obj, bol) {
         let _this = this;
         this.ajget('/api/getGoods', obj, function (data) {
+          for(let i = 0;i<data.length;i++){
+            console.log(data[i])
+          }
           let arss = [];
           for (let i = 0; i < data.length; i++) {
             let obj = data[i];
@@ -135,6 +138,13 @@
         });
         this.ajget('/api/getContentByPostion', {text_location:1}, function (datas) {
           _this.prizeList = datas;
+          setInterval(function () {
+            if (_this.activeIndex < datas.length - 1) {
+              _this.activeIndex += 1;
+            } else {
+              _this.activeIndex = 0;
+            }
+          }, 5000);
         }, function (errs) {
           console.log(errs)
         });
@@ -233,12 +243,18 @@
             MessageBox('提示', '购物车中已存在，请勿重复添加');
           }
         })
+      },
+      lookBanner(item){
+        if(item.link!=null){
+          window.location = item.link
+        }
       }
     },
     created() {
+      document.title = '舍得叔叔';
       let _this = this;
       this.ajget('/api/getBanners', {}, function (data) {
-        _this.bannerList = data;
+        _this.bannerList = data.reverse();
       }, function (err) {
         console.log(err)
       });

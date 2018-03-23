@@ -120,7 +120,7 @@
             }
             , function (data) {
               if (data.error_code == 0) {
-                _this.$router.push({path: '/cartend/1'});
+                _this.$router.push({path: '/cartend'});
               }else{
                 Toast(''+data.error_msg+'');
               }

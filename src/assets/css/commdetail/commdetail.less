@@ -1,60 +1,68 @@
-.commdetailWarp{
+.commdetailWarp {
   width: 100%;
   font-size: 0;
-  .swiperWarp{
+  .swiperWarp {
     position: relative;
-    .siwper{
+    .siwper {
       height: 7.5rem;
-      img{
+      img {
         height: 7.5rem;
         width: 100%;
       }
     }
-    .kuaisu{
+    .kuaisu {
       width: 1.5rem;
-      height: .96rem;
-      position:absolute;
+      //height: .96rem;
+      position: absolute;
+      padding: 3px 0;
       right: 0;
       bottom: 1rem;
-      background:rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       border-radius: 1rem 0 0 1rem;
       color: #ffffff;
       font-size: 13px;
-      .btnList{
+      .btnList {
         display: flex;
       }
-      &.isShowClass{
+      &.isShowClass {
         width: 6rem;
+        .leftIcon {
+          transform:rotate(180deg)translateX(-17px);
+          -ms-transform:rotate(180deg)translateX(-17px);
+          -moz-transform:rotate(180deg)translateX(-17px);
+          -webkit-transform:rotate(180deg)translateX(-17px);
+          -o-transform:rotate(180deg)translateX(-17px);
+        }
       }
-      .leftIcon{
+      .leftIcon {
         background: url("/static/images/left.png") no-repeat;
-        height: .96rem;
-        flex:0 0 .3rem;
+        //height: .96rem;
+        flex: 0 0 .3rem;
         display: inline-block;
         background-size: .5rem 31px;
         background-position: left center;
       }
-      .iconTxt{
-        flex:0 0 27px;;
-        display:inline-block;
-        padding-top: .18rem;
+      .iconTxt {
+        flex: 0 0 27px;;
+        display: inline-block;
+        //padding-top: .18rem;
         margin-left: 20px;
       }
-      .items{
+      .items {
         flex: 1;
         margin-left: 20px;
         display: flex;
-        .item{
+        .item {
           flex: 1;
           line-height: .4rem;
-          .itemIcon{
-            padding-top: .09rem;
+          .itemIcon {
+            padding-bottom: .09rem;
             text-align: center;
-            img{
+            img {
               width: 21%;
             }
           }
-          .itemTxt{
+          .itemTxt {
             font-size: 12px;
             text-align: center;
           }
@@ -62,27 +70,27 @@
       }
     }
   }
-  .commInfo{
-    padding:0 .24rem;
+  .commInfo {
+    padding: 0 .24rem;
     padding-bottom: .24rem;
-    .title{
-      padding-top:.22rem;
-      line-height:.68rem;
+    .title {
+      padding-top: .22rem;
+      line-height: .68rem;
       font-size: 19px;
       font-weight: 400;
       color: #333333;
     }
-    .numMen{
+    .numMen {
       line-height: .54rem;
       font-size: 13px;
       color: #999999;
     }
-    .labalList{
+    .labalList {
       padding: .16rem 0 .16rem 0;
       font-size: 0;
       border-bottom: 1px solid #e6e6e6;
-      span{
-        padding: .09rem .14rem;
+      span {
+        padding: .02rem .14rem;
         font-size: 11px;
         color: #999999;
         border-radius: 3px;
@@ -93,92 +101,97 @@
       }
     }
   }
-  .numInfo{
+  .numInfo {
     padding: .27rem .24rem .3rem;
     display: flex;
-    .numItem{
+    .numItem {
       flex: 1;
       text-align: center;
-      .title{
+      .title {
         font-size: 15px;
         color: #ffc62b;
         line-height: .5rem;
         font-weight: 700;
       }
-      .other{
-        font-size:11px;
+      .other {
+        font-size: 11px;
         line-height: .39rem;
         color: #b7b3bc;
       }
     }
   }
-  .strategy{
-    font-size:0;
+  .strategy {
+    font-size: 0;
     padding-left: .24rem;
     height: .9rem;
-    background:url("/static/images/right.png") #fffcf5 no-repeat;
+    background: url("/static/images/right.png") #fffcf5 no-repeat;
     background-size: .25rem .30rem;
-    background-position:97% center;
+    background-position: 97% center;
     border-bottom: #f2f2f2 .2rem solid;
-    img{
-      margin-top:.3rem;
+    img {
+      margin-top: .3rem;
       height: .25rem;
     }
   }
-  .cardItem{
-    padding:0 .24rem;
+  .cardItem {
+    padding: 0 .24rem;
     line-height: .88rem;
     font-size: 15px;
-    background:url("/static/images/right.png")no-repeat;
+    background: url("/static/images/right.png") no-repeat;
     background-size: .25rem .30rem;
-    background-position:97% center;
-    .borderbo{
+    background-position: 97% center;
+    .borderbo {
       border-bottom: 1px solid #e6e6e6;
     }
-    &.bor2{
-      border-bottom:.68rem  solid #f2f2f2;
+    &.bor2 {
+      border-bottom: .68rem solid #f2f2f2;
     }
   }
-  .mesg{
+  .mesg {
     border-top: 1px solid #e1e1e1;
     line-height: .8rem;
     font-size: 13px;
     color: #333333;
     padding-left: .24rem;
     background: url("/static/images/bbbb_02.jpg");
-    //background-repeat: repeat-x;background-repeat
+    position: fixed;
+    left: 0;
+    bottom: 1.2rem;
+    width: 100%;
+    background: #ffffff;
+    z-index: 999999;
   }
-  .bottom{
+  .bottom {
     height: 1.2rem;
     padding: .2rem 0;
     display: flex;
     border-top: 1px solid #cccccc;
-    .cart{
-      flex:0 0 2.58rem;
+    .cart {
+      flex: 0 0 2.58rem;
       text-align: center;
-      .iconsss{
+      .iconsss {
         width: .44rem;
         height: .44rem;
         display: block;
-        background:url("/static/images/cart.png");
+        background: url("/static/images/cart.png");
         background-size: 100% 100%;
         margin: 0 auto;
         margin-bottom: .13rem;
       }
-      .txt{
+      .txt {
         line-height: .3rem;
         font-size: 11px;
         color: #b7b3bc;
       }
     }
-    .r{
+    .r {
       flex: 1;
       display: flex;
-      .btn{
+      .btn {
         flex: 1;
         background: #b7b3bc;
         color: #ffffff;
-        border-radius:5px;
+        border-radius: 5px;
         margin-right: .24rem;
         font-size: 15px;
         text-align: center;
@@ -186,14 +199,15 @@
       }
     }
   }
-  .thers{
-    background:rgba(0,0,0,0.45);
+  .thers {
+    background: rgba(0, 0, 0, 0.45);
     position: fixed;
     left: 0;
-    top:0;
+    top: 0;
     width: 100%;
     height: 100%;
-    .theTittle{
+    z-index: 999999999999;
+    .theTittle {
       padding-top: .38rem;
       line-height: .48rem;
       font-size: 14px;
@@ -204,7 +218,7 @@
       background: #ffffff;
       width: 100%;
     }
-    .detailOver{
+    .detailOver {
       width: 100%;
       height: 5.5rem;
       overflow-y: scroll;
@@ -214,16 +228,16 @@
       bottom: .88rem;
       font-size: 12px;
       padding: 0 .24rem;
-      p{
+      p {
         line-height: 1.05rem;
         border-bottom: 1px solid #cccccc;
         padding-left: .76rem;
-        background:url("/static/images/dp.png") no-repeat;
+        background: url("/static/images/dp.png") no-repeat;
         background-position: left center;
         background-size: .42rem .42rem;
       }
     }
-    .backBtn{
+    .backBtn {
       width: 100%;
       line-height: .88rem;
       background: #c942b3;

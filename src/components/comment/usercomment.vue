@@ -42,7 +42,7 @@
       }
     },
     created(){
-      window.title = '评价';
+      document.title = '评价';
       this.getDetail();
     },
     methods: {

@@ -1,9 +1,9 @@
 <template>
   <div class="orderDetail">
     <orderStatus :orderType="orderStatus"></orderStatus>
-    <div class="lastTime">
+    <div class="lastTime" v-show="orderStatus==1">
       <p class="title">未支付</p>
-      <p class="lastDate">请于 2小时35分 内支付租金</p>
+      <p class="lastDate">请于 {{overdue_time}}支付租金</p>
     </div>
     <div class="sendInfo">
       <p class="title">
@@ -22,10 +22,10 @@
       <p class="title">
         商品全家福
       </p>
-      <img :src=all_pic>
+      <img :src="'http://shede.sinmore.vip/storage/goods/'+all_pic">
     </div>
     <div class="orderCommList">
-      <div class="orderCommItem" v-for="(it,ins) in get_goodsname">
+      <div class="orderCommItem" v-for="(it,ins) in get_goodsname"  @click="godetail(it)">
         <div class="commInfo">
           <img :src=it.goods_pic>
           <div class="txt">
@@ -50,7 +50,7 @@
               设备描述
             </p>
             <p class="des">
-              索尼照相机走的是高端时尚前卫路线,CCD技术先进，便携中CCD技术先进，便携中的高像素，自动捕捉头像，而且索尼照相机还支持笑脸快门，可以捕捉精彩的一瞬间。
+              {{e.abrasion}}
             </p>
             <div class="imgs">
               <img :src=httptxt+ik.pic_url v-for="(ik,ilq) in e.has_manypics">
@@ -110,22 +110,21 @@
     </div>
     <div class="adminInfo borderb2" v-if="get_remark.length>0">
       <p class="title" v-for="(iqwe,iwqd) in get_remark">
-        {{iqwe}}
+        {{iqwe.remark}}
       </p>
     </div>
     <div class="adminInfo aboutInfo">
       <p class="title">相关注意事项</p>
-      <a :href="item.link" v-for="(item,ins) in prizeList">
+      <a v-for="(item,ins) in prizeList" @click="lookDetail(item)">
         {{item.title}}
       </a>
     </div>
     <div class="bottom">
-      <!---->
       <span class="btn cancel" @click="cancelOrder" v-if="orderStatus==2">取消订单</span>
       <span class="btn gopay" @click="pay(1)" v-if="orderStatus==1">支付租金</span>
       <span class="btn gopay" @click="pay(2)" v-if="orderStatus==3">支付押金</span>
       <span class="btn gopay" @click="goreturn" v-if="orderStatus==7">商品返还</span>
-      <span class="btn gopay" @click="addDay" v-if="orderStatus==7">延期申请</span>
+      <span class="btn gopay" @click="addDay" v-if="orderStatus==7&& orderStatus ==2">延期申请</span>
       <span class="btn gopay" @click="looglogistics" v-if="orderStatus==5">查看物流</span>
       <span class="btn gopay" @click="shouhuoyichang" v-if="orderStatus==5">收货异常</span>
       <span class="btn gopay" @click="goelva" v-if="orderStatus==10">评价</span>
@@ -135,6 +134,8 @@
 <script type="text/ecmascript-6">
   import orderStatus from '../orderStatus/orderStatus.vue'
   import { MessageBox,Toast } from 'mint-ui';
+  import returnComm from '../returnComm/returnComm'
+  import {mapState, mapActions, mapGetters} from 'vuex'
   export default{
     data(){
       return {
@@ -156,34 +157,50 @@
         get_goodsname:[],
         get_remark:[],
         httptxt:'http://shede.sinmore.vip/storage/equipment/',
-        prizeList:[]
+        prizeList:[],
+        overdue_time:''
       }
     },
     components: {
-      orderStatus
+      orderStatus,
+      returnComm
     },
     created(){
+      document.title = '订单详情';
       let _this = this;
       this.getData();
       this.ajget('/api/getContentByPostion', {text_location:2}, function (datas) {
-        console.log(datas)
+        console.log(datas);
         _this.prizeList = datas;
       }, function (errs) {
         console.log(errs)
       });
     },
     methods:{
+      ...mapActions(['apar']),
       looglogistics(){
-        this.$router.push({path: '/logistics/1'});
+        let _this = this;
+        this.$router.push({path: '/logistics/'+_this.orderNum});
+      },
+      lookDetail(item){
+        if(r.link){
+          window.location = r.link
+        }else {
+          window.location = '/#/innerDetail/'+r.id
+        }
       },
       goreturn(){
-        this.$router.push({path: '/returnComm/'+this.$route.params.id});
+        let _this = this;
+        this.$router.push({path: '/returnComm/'+_this.gorderId});
+      },
+      godetail(d){
+        this.$router.push({path: '/commdetail/' + d.goods_id});
       },
       getData(){
-        let orderSn = this.$route.params.id;
+        let orderSn = this.gorderId;
         let _this = this;
         _this.ajpost('/api/orderDetail',{order_id:orderSn},function (data) {
-          console.log(data)
+          console.log(data);
           _this.orderStatus = data.data.type;
           _this.sendLocation = data.data.address;
           _this.userName = data.data.consignee;
@@ -200,6 +217,7 @@
           _this.back_rent = data.data.back_rent;
           _this.get_remark = data.data.get_remark;
           _this.back_deposit = data.data.back_deposit;
+          _this.overdue_time = data.data.overdue_time;
         },function (err) {
           console.log(err)
         })
@@ -213,7 +231,7 @@
         }).then(action => {
           if(action == 'confirm'){
             _this.ajpost('/api/orderAbandon',{
-              order_id:_this.$route.params.id
+              order_id:_this.gorderId
             },function (data) {
               console.log(data);
               window.location ='/#/order'
@@ -223,6 +241,8 @@
         /**/
       },
       addDay(){
+        window.localStorage.orderId = this.gorderId;
+        window.location = '/#/addDay'
       },
       pay(n){
         let _this =this;
@@ -242,28 +262,39 @@
               console.log(res);
               let call = res.err_msg;
               if(call == 'get_brand_wcpay_request:ok'){
-                window.location='/#/payCall/'+data.data.order_sn+'/'+'success'
+                let ke = data.data.order_sn+','+'success';
+                _this.apar(ke);
+                window.location='/#/payCall'
               }else if(call == 'get_brand_wcpay_request:cancel'){
-                window.location='/#/payCall/'+data.data.order_sn+'/'+''+n+''
+                let ke = data.data.order_sn+','+''+n+''
+                _this.apar(ke);
+                window.location='/#/payCall'
               }else{
-                window.location='/#/payCall/'+data.data.order_sn+'/'+''+n+''
+                let ke = data.data.order_sn+','+''+n+''
+                l(ke);
+                window.location='/#/payCall'
               }
             });
         },function(err){console.log(err)});
       },
       shouhuoyichang(){
         let _this = this;
-        _this.ajpost('/api/orderabnormal',{order_id:_this.$route.params.id},function (data) {
-          if(data.error_code ==0){
-            Toast('成功');
-          }else{
-            Toast(''+data.error_msg+'');
-          }
-        })
+        MessageBox.confirm('确认操作').then(action => {
+          _this.ajpost('/api/orderabnormal',{order_id:_this.gorderId},function (data) {
+            if(data.error_code ==0){
+              Toast('成功');
+            }else{
+              Toast(''+data.error_msg+'');
+            }
+          })
+        });
       },
       goelva(){
-
+        window.location = '/#/usercomment/'+this.gorderId
       }
+    },
+    computed:{
+      ...mapGetters(['gorderId']),
     }
   }
 </script>

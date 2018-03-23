@@ -14,8 +14,8 @@
 }
 .commdetailWarp .swiperWarp .kuaisu {
   width: 1.5rem;
-  height: .96rem;
   position: absolute;
+  padding: 3px 0;
   right: 0;
   bottom: 1rem;
   background: rgba(0, 0, 0, 0.8);
@@ -29,9 +29,15 @@
 .commdetailWarp .swiperWarp .kuaisu.isShowClass {
   width: 6rem;
 }
+.commdetailWarp .swiperWarp .kuaisu.isShowClass .leftIcon {
+  transform: rotate(180deg) translateX(-17px);
+  -ms-transform: rotate(180deg) translateX(-17px);
+  -moz-transform: rotate(180deg) translateX(-17px);
+  -webkit-transform: rotate(180deg) translateX(-17px);
+  -o-transform: rotate(180deg) translateX(-17px);
+}
 .commdetailWarp .swiperWarp .kuaisu .leftIcon {
   background: url("/static/images/left.png") no-repeat;
-  height: .96rem;
   flex: 0 0 .3rem;
   display: inline-block;
   background-size: .5rem 31px;
@@ -40,7 +46,6 @@
 .commdetailWarp .swiperWarp .kuaisu .iconTxt {
   flex: 0 0 27px;
   display: inline-block;
-  padding-top: .18rem;
   margin-left: 20px;
 }
 .commdetailWarp .swiperWarp .kuaisu .items {
@@ -53,7 +58,7 @@
   line-height: .4rem;
 }
 .commdetailWarp .swiperWarp .kuaisu .items .item .itemIcon {
-  padding-top: .09rem;
+  padding-bottom: .09rem;
   text-align: center;
 }
 .commdetailWarp .swiperWarp .kuaisu .items .item .itemIcon img {
@@ -85,7 +90,7 @@
   border-bottom: 1px solid #e6e6e6;
 }
 .commdetailWarp .commInfo .labalList span {
-  padding: .09rem .14rem;
+  padding: .02rem .14rem;
   font-size: 11px;
   color: #999999;
   border-radius: 3px;
@@ -138,7 +143,7 @@
   border-bottom: 1px solid #e6e6e6;
 }
 .commdetailWarp .cardItem.bor2 {
-  border-bottom: .68rem  solid #f2f2f2;
+  border-bottom: .68rem solid #f2f2f2;
 }
 .commdetailWarp .mesg {
   border-top: 1px solid #e1e1e1;
@@ -147,6 +152,12 @@
   color: #333333;
   padding-left: .24rem;
   background: url("/static/images/bbbb_02.jpg");
+  position: fixed;
+  left: 0;
+  bottom: 1.2rem;
+  width: 100%;
+  background: #ffffff;
+  z-index: 999999;
 }
 .commdetailWarp .bottom {
   height: 1.2rem;
@@ -193,6 +204,7 @@
   top: 0;
   width: 100%;
   height: 100%;
+  z-index: 999999999999;
 }
 .commdetailWarp .thers .theTittle {
   padding-top: .38rem;

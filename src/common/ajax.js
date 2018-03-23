@@ -5,6 +5,7 @@ export function ajpost(url,data,call,err) {
   var token = getCookie('token');
   if(token ==''){
     if(parseQueryString().token == undefined){
+      // setCookie('token','eyJpdiI6Imx3OFpmam5HZFwvakROWGYraDFMMDBBPT0iLCJ2YWx1ZSI6Inc4b01j',1);
        window.location = ' http://shede.sinmore.vip/api/weixinLogin';
       return;
     }else {
@@ -31,7 +32,8 @@ export function ajget(url,data,call,err) {
   var token = getCookie('token');
   if(token == ''){
     if(parseQueryString().token == undefined){
-       window.location = ' http://shede.sinmore.vip/api/weixinLogin';
+      // setCookie('token','eyJpdiI6Imx3OFpmam5HZFwvakROWGYraDFMMDBBPT0iLCJ2YWx1ZSI6Inc4b01j',1);
+      window.location = ' http://shede.sinmore.vip/api/weixinLogin';
       return;
     }else {
       setCookie('token',parseQueryString().token,1);

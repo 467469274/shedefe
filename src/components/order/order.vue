@@ -75,17 +75,24 @@
         <div class="goOrder" @click.stop="orderErro(item.order_sn)" v-if="item.type == 6">
           收货异常
         </div>
-        <div class="goOrder" @click.stop="addDay(item.order_sn)" v-if="item.type == 7">
+        <div class="goOrder" @click.stop="addDay(item)" v-if="item.type == 7 &&item.status ==2">
           申请延期
         </div>
-        <div class="goOrder" @click.stop="commBack(item.order_sn)" v-if="item.type == 7">
+        <div class="goOrder" @click.stop="commBack(item)" v-if="item.type == 7">
           商品发还
         </div>
         <div class="goOrder" @click.stop="ela(item.order_sn)" v-if="item.type == 10">
           去评价
         </div>
         <p class="mesg">
-          请等待管理员审核订单，通过后请按时支付押金。
+          <span v-if="item.type == 1">请于{{item.overdue_time}} 前支付租金</span>
+          <span v-if="item.type == 0">已为您取消本次订单，如有需要请再次下单。</span>
+          <span v-if="item.type == 2">请等待管理员审核订单，通过后请按时支付押金。</span>
+          <!--<span v-if="item.type == 3">请您于{{item.overdue_time}}之前支付押金</span>-->
+          <span v-if="item.type == 9">正在为您处理退款事宜</span>
+          <span v-if="item.type == 7">如有需要，可以申请延期发还商品一次哦~</span>
+          <span v-if="item.type == 8">我们将在收到包裹24小时内完成审核</span>
+          <span v-if="item.type ==10">优秀评价可获得现金奖励哦</span>
         </p>
       </li>
     </ul>
@@ -93,6 +100,7 @@
 </template>
 <script type="text/ecmascript-6">
   import {Toast} from 'mint-ui';
+  import {mapState, mapActions, mapGetters} from 'vuex'
   export default{
     filters: {
       order(data) {
@@ -132,15 +140,18 @@
       }
     },
     created(){
-      this.getData()
+      this.getData();
+      document.title = '订单列表'
     },
     methods: {
+      ...mapActions(['apar','aorderId']),
       check(n){
         this.type = n;
         this.getData();
       },
       goDetail(n){
-        this.$router.push({path: '/orderDetail/'+n});
+        this.aorderId(n);
+        this.$router.push({path: '/orderDetail'});
       },
       getData(){
         let _this  = this ;
@@ -169,17 +180,37 @@
               console.log(res);
               let call = res.err_msg;
               if(call == 'get_brand_wcpay_request:ok'){
-                window.location='/#/payCall/'+data.data.order_sn+'/'+'success'
+                /*let ke = data.data.order_sn+','+'success';
+                _this.apar(ke);
+                window.location='/#/payCall'*/
+                _this.getData();
               }else if(call == 'get_brand_wcpay_request:cancel'){
-                window.location='/#/payCall/'+data.data.order_sn+'/'+''+type+''
+                let ke = data.data.order_sn+','+''+type+'';
+                _this.apar(ke);
+                window.location='/#/payCall'
               }else{
-                window.location='/#/payCall/'+data.data.order_sn+'/'+''+type+''
+                let ke = data.data.order_sn+','+''+type+'';
+                _this.apar(ke)
+                window.location='/#/payCall'
               }
             });
         },function(err){console.log(err)});
       },
       cancel(orderSn){
-
+        let _this = this;
+        MessageBox({
+          title: '提示',
+          message: '确定要取消此订单?',
+          showCancelButton: true
+        }).then(action => {
+          if(action == 'confirm'){
+            _this.ajpost('/api/orderAbandon',{
+              order_id:orderSn
+            },function (data) {
+              window.location ='/#/order'
+            })
+          }
+        });
       },
       orderErro(orderSn){
         let _this = this;
@@ -192,14 +223,19 @@
           }
         })
       },
-      addDay(orderSn){},
-      commBack(orderSn){},
-      ela(orderSn){}
+      addDay(orderSn){
+        window.localStorage.orderId = orderSn.id;
+        window.location='/#/addDay'
+      },
+      commBack(orderSn){
+        window.location = '/#/returnComm/'+orderSn.id;
+      },
+      ela(orderSn){
+        window.location = '/#/usercomment/'+orderSn;
+      }
     }
   }
 </script>
 <style>
   @import "../../assets/css/order/orderlist.css";
 </style>
-<!--
-        -->
