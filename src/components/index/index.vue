@@ -251,6 +251,20 @@
       }
     },
     created() {
+
+     /* pushHistory();
+      window.addEventListener("popstate", function(e) {
+        MessageBox.confirm('确认要退出吗?').then(action => {
+          WeixinJSBridge.call('closeWindow')
+        });
+      }, false);
+      function pushHistory() {
+        var state = {
+          title: "title",
+          url: "#"
+        };
+        window.history.pushState(state, "title", "#");
+      }*/
       document.title = '舍得叔叔';
       let _this = this;
       this.ajget('/api/getBanners', {}, function (data) {
